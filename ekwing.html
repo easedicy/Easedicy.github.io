@@ -1,0 +1,1625 @@
+
+<!--
+ * @Author: heyouqin@moyi365.com
+ * @LastEditors: heyouqin@moyi365.com
+ * @Date: 2021-12-15 16:39:54
+ * @LastEditTime: 2022-03-23 11:04:57
+ * @Descripttion: file content
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+  content="翼课网,中小学英语基于教学考的听说读写测全面解决方案,提供智能口语纠错，外教真人示范,教材课堂同步,个性化教学考纠诊,绿色安全上网,家校互通伴学,让学生开心，家长放心，教师省心，翼课网，为你的学习插上一双智慧的翅膀。翼课网 www.ekwing.com " />
+  <title>翼课网，掌握学习之道</title>
+  <link rel="icon" href="https://res.ekwing.com/images/pc/index/favicon.ico">
+  <link href="https://res.ekwing.com/resource/athena/css/pte_login.css?v=10040" rel="stylesheet" type="text/css" />
+  <link href="https://res.ekwing.com/resource/athena/css/login_head.css?v=10040" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://res.ekwing.com/css/pc/index/index/loginBase.css">
+  <link rel="stylesheet" href="https://res.ekwing.com/css/pc/index/comm/base.css">
+  <link rel="stylesheet" href="https://res.ekwing.com/css/pc/index/index/index.css">
+  <script type="text/javascript" src="https://res.ekwing.com/resource/athena/js/jquery.js?v=10040"></script>
+  <script type="text/javascript" src="https://res.ekwing.com/resource/athena/js/require.js?v=10040"></script>
+  <script type="text/javascript" src="https://passport.ekwing.com/resource/js/athena_login.js"></script>
+  <script type="text/javascript" src="https://res.ekwing.com/resource/athena/js/jquery.md5.js?v=10040"></script>
+  <script type="text/javascript" src="https://res.ekwing.com/resource/athena/js/login-form-select.js?v=10040"></script>
+  <script type="text/javascript" src="https://res.ekwing.com/resource/athena/js/form-util.js?v=10040"></script>
+  <script type="text/javascript" src="https://res.ekwing.com/resource/athena/js/scrollReveal.js?v=10040"></script>
+  <script type="text/javascript" src="https://res.ekwing.com/resource/athena/js/storage.js?v=10040"></script>
+  <script type="text/javascript" src="https://res.ekwing.com/resource/athena/js/login/school.js?v=10040"></script>
+  <script type="text/javascript" src="https://res.ekwing.com/resource/athena/js/passport.js?v=10040"></script>
+  <script src="https://res.ekwing.com/js/mb/qrcode.js?v=10040"></script>
+
+
+  <script defer type="text/javascript">
+    var __ROOT__ = "https://www.ekwing.com/";
+    var __LOGINDOMAIN = "https://passport.ekwing.com/";
+    require.config({
+      paths: {
+        login: 'https://res.ekwing.com/resource/athena/js/pte_new_login',
+        "countUp": "https://res.ekwing.com/js/pc/index/comm/countUp",
+      },
+    });
+    require(['countUp', "login"], function (CountUp) {
+      var options = {
+        useEasing: true,
+        useGrouping: true,
+        separator: ',',
+        decimal: '.',
+        prefix: '',
+        suffix: ''
+      };
+      countUp1 = null
+
+      $.get(
+        'https://www.ekwing.com/site/counter',
+        {},
+        function (data, textStatus, jqXHR) {
+          countUp1 = new CountUp("countUp1", 0, data.data.total_school_num, 0, 2.5, options);
+          countUp2 = new CountUp("countUp2", 0, data.data.total_teacher_num, 0, 2.5, options);
+          countUp3 = new CountUp("countUp3", 0, data.data.total_student_num, 0, 2.5, options);
+          countUp4 = new CountUp("countUp4", 0, data.data.stu_ques_num, 0, 2.5, options);
+          countUp5 = new CountUp("countUp5", 0, data.data.spoken_eval_num, 0, 2.5, options);
+          countUp6 = new CountUp("countUp6", 0, data.data.correct_num, 0, 2.5, options);
+          countUp7 = new CountUp("countUp7", 0, data.data.test_num, 0, 2.5, options);
+          countUp8 = new CountUp("countUp8", 0, data.data.learn_num, 0, 2.5, options);
+          $(window).scroll(function () {
+            if ($(window).scrollTop() >= 2700 && $(window).scrollTop() <= 3200  && countUp1 !== null) {
+              countUp1.start();
+              countUp2.start();
+              countUp3.start();
+              countUp4.start();
+              countUp5.start();
+              countUp6.start();
+              countUp7.start();
+              countUp8.start();
+            }
+          })
+          // $('.index_data1').text(data.data.stu_ques_num);
+          // $('.index_data2').text(data.data.spoken_eval_num);
+          // $('.index_data3').text(data.data.correct_num);
+          // $('.index_data4').text(data.data.test_num);
+          // $('.index_data5').text(data.data.learn_num);
+          // $('.total_school_num').text(data.data.total_school_num);
+          // $('.total_teacher_num').text(data.data.total_teacher_num);
+          // $('.total_student_num').text(data.data.total_student_num);
+        },
+        'json'
+      );
+
+
+      function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+          var c = ca[i].trim();
+          if (c.indexOf(name) == 0) { return c.substring(name.length, c.length); }
+        }
+        return "";
+      }
+      var rem = getCookie('memberPass');
+      if (rem) {
+        $(".Ekjs-select-txt").text(window.localStorage.getItem("Cache_login_school_name"))
+        $("#memberPass").prop("checked", true);
+        $("#name").val(getCookie('username'));
+        $("#password").val(getCookie('password'));
+      }
+    })
+  </script>
+
+  </script>
+</head>
+
+
+<body>
+  <!-- 头部导航区域占位 -->
+  <div id="header">
+    <!--
+ * @Author: heyouqin@moyi365.com
+ * @LastEditors: heyouqin@moyi365.com
+ * @Date: 2021-12-15 16:50:41
+ * @LastEditTime: 2022-01-11 15:00:06
+ * @Descripttion: file content
+-->
+<link rel="stylesheet" href="https://res.ekwing.com/css/pc/index/comm/header.css">
+<!-- 公共header组件 -->
+<div class="header">
+  <div class="header_wrapper">
+    <div class="logo">
+    <a href="https://www.ekwing.com/site/index">
+    <img src="https://res.ekwing.com/images/pc/index/index/logo.png" alt="">
+    </a>
+    </div>
+    <div>
+      <ul id="header_ul">
+        <li index=1 class="header_li"><a href="https://www.ekwing.com/site/index">首页</a></li>
+        <li index=2 class="header_li"><a href="https://www.ekwing.com/site/product">产品服务</a></li>
+        <li index=3 class="header_li"><a href="https://www.ekwing.com/Success/success">应用案例</a></li>
+        <li index=4 class="header_li"><a href="https://www.ekwing.com/site/education">教育科研</a></li>
+        <li index=5 class="header_li"><a href="https://www.ekwing.com/about/aboutus">关于翼课</a></li>
+        <li index=6 class="header_li"><a href="https://www.ekwing.com/load">下载中心</a></li>
+        <li index=6 class="header_li"><a href="https://www.ekwing.com/site/helpcode">帮助中心</a></li>
+      </ul>
+        <ul id="header_hover_block">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+    </div>
+
+  </div>
+
+</div>  </div>
+  <!-- 内容区 -->
+  <div id="content">
+    <!-- 登录部分 -->
+    <div id="login">
+      <!--
+ * @Author: heyouqin@moyi365.com
+ * @LastEditors: heyouqin@moyi365.com
+ * @Date: 2021-12-24 15:56:16
+ * @LastEditTime: 2022-01-11 14:46:18
+ * @Descripttion: file content
+-->
+<link rel="stylesheet" href="https://res.ekwing.com/css/pc/index/index/login.css">
+<div class="login_box">
+  <ul class="login_ul">
+    <li class="login_li">
+      <div class="login_banner">
+        <div class="login_banner_bg"><img src="https://res.ekwing.com/images/pc/index/index/bg_top.png" alt=""></div>
+        <div class="login_banner_bg_bottom"><img src="https://res.ekwing.com/images/pc/index/index/bg_bottom.png" alt=""></div>
+        <div class="login_banneer_font login_banneer_font1"><img src="https://res.ekwing.com/images/pc/index/index/font1.png" alt=""></div>
+        <div class="login_banneer_font login_banneer_font2"><img src="https://res.ekwing.com/images/pc/index/index/font2.png" alt=""></div>
+        <div class="login_banneer_font login_banneer_font3"><img src="https://res.ekwing.com/images/pc/index/index/font3.png" alt=""></div>
+        <div class="login_banneer_font login_banneer_font4"><img src="https://res.ekwing.com/images/pc/index/index/font4.png" alt=""></div>
+        <div class="login_banneer_font login_banneer_font5"><img src="https://res.ekwing.com/images/pc/index/index/font5.png" alt=""></div>
+        <div class="login_banneer_font login_banneer_font6"><img src="https://res.ekwing.com/images/pc/index/index/font6.png" alt=""></div>
+      </div>
+    </li>
+  </ul>
+  <ul class="login_bg_btn_ul">
+  </ul>
+</div>
+<div class="pte_login_bg_box" role="tab-box">
+  <!--登录窗口-->
+  <div class="content rel" style="z-index:3">
+    <div style="position: absolute;right:0;margin-top:100px; z-index:6" class="login-container">
+      <div class="rel password-login">
+        <div class="pte_user_box">
+          <!--登录菜单-->
+          <div class="qrcode-btn-container" id="qrCodeLogin">
+            <img class="qrcode-btn" src="https://res.ekwing.com/images/pc/index/index/login-qrcode.png" alt="">
+            <img class="qrcode-btn-hover"
+              src="https://res.ekwing.com/images/pc/index/index/login-qrcode-hover.png" alt="">
+          </div>
+          <ul class="pte_user_menu  fw">
+            <li class="selected"><span>实名登录</span><div></div></li>
+            <li class=""><span>快速登录</span><div></div></li>
+          </ul>
+          <!--实名登陆-->
+          <div id="realNameLogin" class="rel pte_real_name">
+            <ul style="display: none"></ul>
+            <ul id="jsSchoolLoginPanel" class="pte_real_name_box">
+              <li class="Ekjs-select-holder mb15 studentInput" onselectstart="return false;" unselectable="off">
+                <input type="hidden" id="schoolname" value="">
+                <span class="Ekjs-select-txt">请选择所在学校</span><em class="Ekjs-select-caret"></em>
+                <i class="iconfont bottomBtn">&#xe631;</i>
+              </li>
+              <li class="pte_user_name mb15 studentInput">
+                <label class="login-form-field">
+                  <input type="text" autocomplete="off" id="name" placeholder="请输入中文姓名" class="input-field">
+                </label>
+              </li>
+              <li class="pte_user_password mb15 studentInput">
+                <label class="login-form-field">
+                  <input type="password" autocomplete="off" id="password" placeholder="密码" class="input-field ">
+                </label>
+              </li>
+              <li class="login-form-item " id="jsVerifyPanel" style="display: none">
+                <input type="text" id="js_verifyCode" name="verifyCode"
+                  class="pass-text-input pass-text-input-verifyCode" maxlength="4" placeholder="验证码">
+                <div class="pass-verifyCodeImgParent"><img class="pcth100" src="">
+                </div>
+                <span id="pass_verifyCodeChange" class="pass-change-verifyCode">换一张</span>
+              </li>
+              <li class="cor-red f12 pt15" id="jsErrorPanel" style="display: none">
+                请选择您所在的学校
+              </li>
+              <li class="pt15 f12 g6 lh20 fix">
+                <div class="l">
+                  <input id="memberPass" style="opacity:0" type="checkbox" name="memberPass" />
+                  <label for="memberPass"></label>
+                  <label for="memberPass" class="">记住密码</label>
+                </div>
+                <a href="https://www.ekwing.com/Forgetpwd/telView" class="g6  r">忘记密码？</a>
+              </li>
+              <li class="f18 login_btn_li">
+                <span id="jsLoginBtn" class="btn btn-green lh24 db">登录</span>
+              </li>
+            </ul>
+            <ul id="jsShowUsers" class="item_panel mt10 loginSucceed" style="display: none">
+            </ul>
+          </div>
+          <!--快速登录-->
+          <div id="pass_login_box" class="pte_fleet_box p20" style="display: none">
+
+          </div>
+        </div>
+        <div class="pte_school_address_box" style="position: absolute;left: 40px;top: 151px; display: none">
+          <ul class="pte_address_menu g6 tc fix ">
+            <li class="selected">省份</li>
+            <li class="pte_border-left ">城市</li>
+            <li class="pte_border-left">区县</li>
+            <li class="pte_border-left">学校</li>
+          </ul>
+          <div class="pte_district">
+            <!--省份模块-->
+            <div class="list-wraper pte_province ">
+              <ul>
+                <li class="fix">
+                  <div class="l">
+                    <p>A-G</p>
+                  </div>
+                  <div class="pte_province_list">
+                    <span data-id="82">安徽</span>
+                    <span data-id="76">北京</span>
+                    <span data-id="101">重庆</span>
+                    <span data-id="97">福建</span>
+                    <span data-id="85">广东</span>
+                    <span data-id="96">甘肃</span>
+                    <span data-id="86">广西</span>
+                    <span data-id="99">贵州</span>
+                  </div>
+                </li>
+                <li class="fix">
+                  <div class="l">
+                    <p>H-K</p>
+                  </div>
+                  <div class="pte_province_list">
+                    <span data-id="90">河北</span>
+                    <span data-id="94">湖北</span>
+                    <span data-id="105">黑龙江</span>
+                    <span data-id="93">海南</span>
+                    <span data-id="91">河南</span>
+                    <span data-id="95">湖南</span>
+                    <span data-id="78">吉林</span>
+                    <span data-id="88">江苏</span>
+                    <span data-id="89">江西</span>
+                  </div>
+                </li>
+                <li class="fix">
+                  <div class="l">
+                    <p>L-S</p>
+                  </div>
+                  <div class="pte_province_list">
+                    <span data-id="100">辽宁</span>
+                    <span data-id="75">内蒙古</span>
+                    <span data-id="81">宁夏</span>
+                    <span data-id="103">青海</span>
+                    <span data-id="79">四川</span>
+                    <span data-id="83">山东</span>
+                    <span data-id="73">上海</span>
+                    <span data-id="84">山西</span>
+                    <span data-id="102">陕西</span>
+                  </div>
+                </li>
+                <li class="fix">
+                  <div class="l">
+                    <p>T-Z</p>
+                  </div>
+                  <div class="pte_province_list">
+                    <span data-id="80">天津</span>
+                    <span data-id="77">台湾</span>
+                    <span data-id="98">西藏</span>
+                    <span data-id="104">香港</span>
+                    <span data-id="87">新疆</span>
+                    <span data-id="107">翼课网</span>
+                    <span data-id="74">云南</span>
+                    <span data-id="92">浙江</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <!--城市/区县模块-->
+            <div class="list-wraper pte_city" style="display: none">
+              <div class="pte_city_list">
+                <!--<span >合肥</span>-->
+                <!--<span>芜湖</span>-->
+              </div>
+            </div>
+            <div class="list-wraper pte_county" style="display: none">
+              <div class="pte_county_list">
+                <!--<span >瑶海</span>-->
+                <!--<span>庐阳</span>-->
+              </div>
+            </div>
+            <!--搜索学校模块-->
+            <div class="search_box" style="display: none">
+              <input type="text" id="jsSearchPaper" placeholder="没有找到学校？试试搜索">
+              <div class="bg"></div>
+              <i class="iconfont">&#xe654;</i>
+              <label for="search_teachBooks"></label>
+              <div class="errorTip  dn" style="display: none">暂无学校信息</div>
+            </div>
+            <!--学校列表-->
+            <div class="list-wraper pte_school" style="display: none">
+              <ul>
+                <!--<li><span >广州什么什么学校</span></li>-->
+                <!--<li><span>广州什么什么学校</span></li>-->
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 扫码 -->
+      <div class="qrcode-login hidden">
+        <div class="password-btn-container" id="passwordLogin">
+          <img class="password-btn" src="https://res.ekwing.com/images/pc/index/index/login-password.png"
+            alt="">
+          <img class="password-btn-hover"
+            src="https://res.ekwing.com/images/pc/index/index/login-password-hover.png" alt="">
+        </div>
+        <p class="f20 g6 tc" style="margin-top:50px;margin-bottom:65px;font-weight: 600;">扫码登录</p>
+        <div class="load-over dn">
+          <div class="qrcode-container">
+            <div id="scanLogin" class="scan-login"></div>
+          </div>
+          <p style="font-size: 14px;margin-top:20px;" class="g6 tc">使用“翼课教师APP”扫码登录</p>
+          <p class="g9 f12 tc" style="margin-top:10px;">翼课教师APP-个人中心-扫一扫</p>
+        </div>
+        <div class="loading dn">
+          <div style="width:200px;height:200px;border: 1px solid #E7E7E7;margin: auto;">
+            <div class="tc" style="width: 170px;height: 170px;background: #F7F7F7;display: flex;margin:15px;">
+              <img style="width: 40px;height: 40px;margin:auto;"
+                src="https://res.ekwing.com/images/pc/index/index/loding.gif" width="20" height="20" alt="">
+            </div>
+          </div>
+          <p style="font-size: 14px;margin-top:25px;" class="g6 tc">正在加载二维码…</p>
+        </div>
+        <div class="wait-login dn g6 f14 tc" style="line-height: 1;">
+          <p class="iconfont" style="margin-top: 70px;color: #40BB8A;font-size: 40px;">&#xe6f2;</p>
+          <p style="font-size: 14px;margin-top:15px;margin-bottom: 10px;">扫码成功</p>
+          <p>请在手机上根据提示确认登录</p>
+          <p id="reScan" style="color: #40BB8A;cursor:pointer;position:absolute;width:100%;bottom:30px;">重新扫描</p>
+        </div>
+        <div class="erweima-fail dn">
+          <div class="qrcode-container">
+            <div id="qrcode"></div>
+          </div>
+          <div class="mask">
+            <p id="freshErweima" class="iconfont tc"
+              style="border-radius: 50%;width: 48px;height: 48px;line-height: 48px;margin:auto;color: white;font-size: 36px;">
+              &#xe684;</p>
+          </div>
+          <p style="font-size: 14px;margin-top:25px;" class="g6 tc">二维码已失效，请点击刷新</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://res.ekwing.com/js/pc/index/index/login.js"></script>    </div>
+
+    <div id="note1">
+      <!--
+ * @Author: heyouqin@moyi365.com
+ * @LastEditors: heyouqin@moyi365.com
+ * @Date: 2021-12-24 15:55:39
+ * @LastEditTime: 2022-01-11 14:46:57
+ * @Descripttion: file content
+-->
+<link rel="stylesheet" href="https://res.ekwing.com/css/pc/index/index/note1.css">
+<div class="note1Box">
+  <div class="note1_round_bg1"></div>
+  <div class="note1_round_bg2"></div>
+  <div>
+    <ul class="note1_ul">
+      <li index=0>
+        <p class="note1_title">四大引擎</p>
+        <p class="note1_subTitle">构建翼课智慧教育之“芯”</p>
+      </li>
+      <li index=1>
+        <p class="note1_title">深耕教育20年</p>
+        <p class="note1_subTitle">精研精创科学丰富大资源</p>
+      </li>
+      <li index=2>
+        <p class="note1_title">深度融合</p>
+        <p class="note1_subTitle">驱动教学模式创新</p>
+      </li>
+      <li index=3>
+        <p class="note1_title">多方式支持</p>
+        <p class="note1_subTitle">区域英语教育治理模式创新</p>
+      </li>
+    </ul>
+    <ul class="note1_block_ul">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+  </div>
+  <div class="note1_content">
+    <ul class="note1_content_ul">
+      <li class="note1_content_li note1_one">
+        <div class="note1_content_top">
+          <div class="note1_content_top_bg"></div>
+          <div class="note1_content_top_tit">
+            翼课智慧教育基于云计算、大数据、新一代人工智能技术，实现智慧化英语学与教。翼课智慧教育以<span class="Focus_0n">四大引擎构筑翼课之“芯”</span>
+            ，包括智能语音识别与评测引擎、智能学习批改引擎、学习大数据引擎、内容智能化管理引擎，全面满足中共中央办公厅、国务院办公厅印发的“双减”政策要求，为课堂教学和创新作业管理提供智能化解决方案，助力教育信息化发展。
+          </div>
+          <div class="node1_content_bottom_bg"></div>
+        </div>
+        <div class="note1_content_bottom">
+          <div class="note1_content_bottom_left">
+            <div class="note1_content_left_top">
+              <img src="https://res.ekwing.com/images/pc/index/index/left_top.png" alt="">
+              <div class="note1_content_item_box">
+                <p class="note1_content_item_title"><span>01</span>智能语音识别与评测引擎</p>
+                <ul class="note1_content_item_ul">
+                  <li><div class="list_disc"></div>AI 结合 ASR（自然语言识别）、NLP(自然语言处理技术)及神经网络语音分析技术</li>
+                  <li><div class="list_disc"></div>智能语言评分模型，基于中高考评分标准及专家打分标准</li>
+                  <li><div class="list_disc"></div>多维度口语评测反馈，包括语音、语调、重读等</li>
+                </ul>
+              </div>
+            </div>
+            <div class="note1_content_left_bottom">
+              <img src="https://res.ekwing.com/images/pc/index/index/left_bottom.png" alt="">
+              <div class="note1_content_item_box note1_content_item_box_bottom">
+                <p class="note1_content_item_title"><span>03</span>学习大数据引擎</p>
+                <ul class="note1_content_item_ul">
+                  <li><div class="list_disc"></div>全程采集、存储、测量、分析学习过程性数据及结果性数据</li>
+                  <li><div class="list_disc"></div>自动生成能力图谱，可视化教学情况，学情评价</li>
+                  <li><div class="list_disc"></div>基于学情智能绘制知识图谱，数据驱动精准教学</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="note1_content_bottom_center">
+            <div class="bg1"></div>
+            <div class="bg2"></div>
+            <div class="bg3">
+              <div class="ekai">
+                <!-- <img class="ekaiFont" src="https://res.ekwing.com/images/pc/index/index/EKAIFont.png" alt=""> -->
+                <img class="ek" src="https://res.ekwing.com/images/pc/index/index/EK.png" alt="">
+                <img class="ai" src="https://res.ekwing.com/images/pc/index/index/AI.png" alt="">
+                <img class="ekaiLight" src="https://res.ekwing.com/images/pc/index/index/ekaiLight.png" alt="">
+                <img class="ekaiCenter" src="https://res.ekwing.com/images/pc/index/index/ekaiCenter.png" alt="">
+              </div>
+              <p class="title_one">EKAI赋能教育</p>
+              <p class="title_two">五育并举 | 落实“双减”</p>
+            </div>
+
+          </div>
+          <div class="note1_content_bottom_right">
+            <div class="note1_content_right_top">
+              <img src="https://res.ekwing.com/images/pc/index/index/right_top.png" alt="">
+              <div class="note1_content_item_box">
+                <p class="note1_content_item_title"><span>02</span>智能学习批改引擎</p>
+                <ul class="note1_content_item_ul">
+                  <li><div class="list_disc"></div>训练、考试智能化批改</li>
+                  <li><div class="list_disc"></div>在线写作，即写即批，错误标注、纠正建议智能提示</li>
+                  <li><div class="list_disc"></div>支持口头答题、手写输入、答题卡识别等自动批改</li>
+                  <li><div class="list_disc"></div>个人及班级学情数据，即时反馈</li>
+                </ul>
+              </div>
+            </div>
+            <div class="note1_content_right_bottom">
+              <img src="https://res.ekwing.com/images/pc/index/index/right_bottom.png" alt="">
+              <div class="note1_content_item_box note1_content_item_box_bottom">
+                <p class="note1_content_item_title"><span>04</span>内容智能化管理引擎</p>
+                <ul class="note1_content_item_ul">
+                  <li><div class="list_disc"></div>AI加持的优质内容生产</li>
+                  <li><div class="list_disc"></div>“知识路由”驱动智能化内容管理</li>
+                  <li><div class="list_disc"></div>内容智能化关联、标注及匹配</li>
+                  <li><div class="list_disc"></div>基于学情数据智能关联知识薄弱项，准确推送训练内容</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="note1_content_li">
+        <div id="note1_content_li">
+              <!--
+ * @Author: heyouqin@moyi365.com
+ * @LastEditors: heyouqin@moyi365.com
+ * @Date: 2021-12-24 16:41:33
+ * @LastEditTime: 2022-01-11 14:59:33
+ * @Descripttion: file content
+-->
+<link rel="stylesheet" href="https://res.ekwing.com/css/pc/index/comm/note1_content_li.css">
+<div>
+  <p class="note1_content_item2_title">多模态丰富大资源，科学满足教、学、测、评、研全需求</p>
+  <div class="note1_content_item2_box">
+    <div class="note1_content_item2_content">
+      <div class="roundBox">
+        <div id="round1" class="round">
+          <p class="data">684</p>
+          <p class="data_title">个专家报告</p>
+        </div>
+        <div id="round2" class="round">
+          <p class="data">543,468</p>
+          <p class="data_title">道题</p>
+        </div>
+        <div id="round3" class="round">
+          <p class="data">94,884</p>
+          <p class="data_title">个阅读篇章</p>
+        </div>
+        <div id="round4" class="round">
+          <p class="data">68,459</p>
+          <p class="data_title">个教研资源</p>
+        </div>
+        <div id="round5" class="round">
+          <p class="data">14,663</p>
+          <p class="data_title">篇写作教学资源</p>
+        </div>
+        <div id="round6" class="round">
+          <p class="data">13,589</p>
+          <p class="data_title">个视频资源</p>
+        </div>
+        <div id="round7" class="round">
+          <p class="data">10,307</p>
+          <p class="data_title">个名师课例<br />与精品微课</p>
+        </div>
+        <div id="round9" class="round">
+          <p class="data">20,1137</p>
+          <p class="data_title">套听说套题</p>
+        </div>
+        <div id="round11" class="round">
+          <p class="data">2,091,278</p>
+          <p class="data_title">张教学图片</p>
+        </div>
+        <div id="round12" class="round">
+          <p class="data">18,570</p>
+          <p class="data_title">个教学设计与课件</p>
+        </div>
+        <div id="round13" class="round">
+          <p class="data">139</p>
+          <p class="data_title">种题型</p>
+        </div>
+      </div>
+      <div class="item2_all_bg"></div>
+    </div>
+  </div>
+</div>              </div>
+        <a href="https://www.ekwing.com/site/showMoreTab2">
+            <div class="viewMore viewMore1"><span>查看更多</span></div>
+        </a>
+      </li>
+      <li class="note1_content_li">
+        <div class="note1_content_top">
+          <div class="note1_content_top_bg"></div>
+          <div class="note1_content_top_tit">
+            自 2014 年 5 月面世以来，翼课智慧教育已在全国 30 多个省（市、自治区）上万所学校得到深度应用。经过专家引领和一线教师广泛探索，逐渐形成了线上线下有机结合、深度融通的“混合式教学”范例，促进“数据驱动式精准教学” “可视化教学” “基于学习分析的掌握式教学” “体验式学习” “探究式学习”等教学模式创新。
+          </div>
+          <div class="node1_content_bottom_bg"></div>
+        </div>
+        <ul class="note1_content_item3_ul">
+          <li>
+            <img src="https://res.ekwing.com/images/pc/index/index/1-1.JPG" alt="" />
+            <div>
+        <a href="https://mp.weixin.qq.com/s/wTSJPL5yCBp-aS3y0dv_DA"></a>
+              <p class="note1_item3_title">混合式教学</p>
+              <p class="note1_item3_content">资源共享、全班互动，贾丽珍的课文教学 so funny</p>
+            </div>
+          </li>
+          <li>
+         <img src="https://res.ekwing.com/images/pc/index/index/1-2.JPG" alt="">
+            <div>
+        <a href="https://mp.weixin.qq.com/s/doAkxTheR9tOBmqfWHKgkg"></a>
+              <p class="note1_item3_title">可视化教学</p>
+              <p class="note1_item3_content">“情境教学”如何恰当运用于课堂？佛山高明英语教研员陆珊珊的语法课告诉你</p>
+            </div>
+          </li>
+          <li>
+            <img src="https://res.ekwing.com/images/pc/index/index/1-3.JPG" alt="">
+            <div>
+        <a href="https://mp.weixin.qq.com/s/LbAb3cNg7dcQXeiNLnLvOg"></a>
+              <p class="note1_item3_title">数据驱动式精准教学</p>
+              <p class="note1_item3_content">数据驱动，学生主体，张荣干的“任务型教学”语法课堪称典范</p>
+            </div>
+          </li>
+          <li>
+            <img src="https://res.ekwing.com/images/pc/index/index/1-4.JPG" alt="">
+            <div>
+        <a href="https://mp.weixin.qq.com/s/a70v_obNsHz4IimwVvPkaA"></a>
+              <p class="note1_item3_title">体验式学习</p>
+              <p class="note1_item3_content">师生共评、智能批改，柳嘉的写作课让学生自己做主</p>
+            </div>
+          </li>
+          <li>
+            <img src="https://res.ekwing.com/images/pc/index/index/1-5.JPG" alt="">
+            <div>
+        <a href="https://mp.weixin.qq.com/s/X7FvYX1we9zMecHeHgOU1Q"></a>
+              <p class="note1_item3_title">探究式学习</p>
+              <p class="note1_item3_content">注重能力培养，落实核心素养，一起来看陈正尧的视听说创新课！</p>
+            </div>
+          </li>
+          <li>
+            <img src="https://res.ekwing.com/images/pc/index/index/1-6.JPG" class="note1_content_item3_ul_bg"></i>
+            <div>
+        <a href="https://mp.weixin.qq.com/s/UVpJkGYnVeXWuwpiNZdaew"></a>
+              <p class="note1_item3_title">掌握式教学</p>
+              <p class="note1_item3_content">教会学生“阅作文”！高晓慧的任务进阶型写作课真有范！</p>
+            </div>
+          </li>
+        </ul>
+      </li>
+      <li class=" note1_content_li">
+        <div id="governance_item">
+        <!--
+ * @Author: heyouqin@moyi365.com
+ * @LastEditors: heyouqin@moyi365.com
+ * @Date: 2021-12-29 17:52:21
+ * @LastEditTime: 2022-01-11 15:00:13
+ * @Descripttion: file content
+-->
+<link rel="stylesheet" href="https://res.ekwing.com/css/pc/index/comm/governance_item.css">
+<div class="item4_box">
+  <div class="rippleBox1">
+    <div class="rippleBox2">
+      <div><span>教育治理<br />模式创新</span></div>
+    </div>
+    <div class="item4_round item4_round1">
+      <span>外语教育信息化<br />应用名师工作室</span>
+    </div>
+    <div class="item4_round item4_round2">
+      <span>基于网络教研网络<br />研修的教师信息化<br />能力发展</span>
+    </div>
+    <div class="item4_round item4_round3">
+      <span>区域伴随式<br />教育质量检测</span>
+    </div>
+    <div class="item4_round item4_round4">
+      <span>互联网+<br />教育公益</span>
+    </div>
+    <div class="item4_round item4_round5">
+      <span>互联网+教育<br />优质均衡发展</span>
+    </div>
+    <div class="item4_round item4_round6">
+      <span>区域智能化<br />学业质量监测</span>
+    </div>
+    <div class="item4_round item4_round7">
+      <span>区域智能化<br>教研</span>
+    </div>
+    <div class="item4_img1 item4_img"></div>
+    <div class="item4_img2 item4_img"></div>
+    <div class="item4_img3 item4_img"></div>
+    <div class="item4_img4 item4_img"></div>
+  </div>
+</div></div>
+        <a href="https://www.ekwing.com/site/education?page=3">
+        <div class="viewMore viewMore2"><span>查看更多</span></div>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<script src="https://res.ekwing.com/js/pc/index/index/note1.js"></script>    </div>
+    <div id="note2">
+      <!--
+ * @Author: heyouqin@moyi365.com
+ * @LastEditors: heyouqin@moyi365.com
+ * @Date: 2021-12-24 15:55:39
+ * @LastEditTime: 2022-01-11 14:48:13
+ * @Descripttion: file content
+-->
+<link rel="stylesheet" href="https://res.ekwing.com/css/pc/index/index/note2.css">
+<div class="note2Box">
+  <p class="note2_title">全场景应用，智能化解决英语教学与测评需求</p>
+  <div class="dashedBox"></div>
+  <ul class="note2_head_ul">
+    <li class="note2_head_li note2_head_li1">
+      <div class="head_bg"><i class="iconfont">&#xe88c;</i></div>
+      <p>翼课智慧课堂<br />应用场景</p>
+    </li>
+    <li class="note2_head_li note2_head_li2">
+      <div class="head_bg"><i class="iconfont">&#xe88d;</i></div>
+      <p>翼课智能听说训练<br />与测评应用场景</p>
+    </li>
+    <li class="note2_head_li note2_head_li3">
+      <div class="head_bg"><i class="iconfont"> &#xe88e;</i></div>
+      <p>翼课英语区域智能化<br />测评应用场景</p>
+    </li>
+    <li class="note2_head_li note2_head_li4">
+      <div class="head_bg"><i class="iconfont">&#xe88b;</i></div>
+      <p>翼课网多终端<br />应用场景</p>
+    </li>
+  </ul>
+  <div class="viewingArea">
+    <ul class="note2_content_ul">
+      <li class="note2_content_li">
+        <div class="note2_content_title">
+          <p>“翼课智慧课堂解决方案”是基于新一代人工智能技术的互联网 +
+            课堂教学整体解决方案。支持“云、网、端”多维运用，贯穿师生课前备课与预习、课中授课与互动、课后巩固与拓展整个学与教过程，支持随堂练习、投票、小组讨论等多种课堂互动形式，自动评测学生随堂测试成绩，智能化即时反馈学生学情数据，帮助教师实现科学化、高效化的精准教学，打造人人参与、即时互动的信息化智慧课堂。
+          </p>
+          <div index=0 class="note2_btn">应用案例</div>
+        </div>
+        <img src="https://res.ekwing.com/images/pc/index/index/note2_item1.png" alt="">
+      </li>
+      <li class="note2_content_li">
+        <div class="note2_content_title">
+          <p>
+            “翼课智能听说训练与测评解决方案”融合EKAI语音识别与评测技术和翼课人机对话系统（机房版），智能化解决学校英语听说训练、人机对话听说考试等难题。该方案匹配地方中高考听说题型，还原人机对话听说考试真实场景，既可满足听说考试训练，又能实现日常听力、口语练习，并即时反馈训练成绩，生成多维度数据分析报告，针对薄弱环节为学生推荐个性化学习内容，有效提高学生听说能力。
+          </p>
+          <div index=1 class="note2_btn">应用案例</div>
+        </div>
+        <img src="https://res.ekwing.com/images/pc/index/index/note2_item2.png" alt="">
+      </li>
+      <li class="note2_content_li">
+        <div class="note2_content_title">
+          <p>
+            “翼课英语区域智能化测评解决方案A：翼赛”有效解决以往区域英语竞赛及统考中投入多、耗时长的难题，测评内容由专业教研团队量身定制，涵盖听力、口语、阅读、写作等多种题型，一键分发试卷、快速批阅，自动生成区域学业监测分析报告，智能化检测学生英语综合能力，为区域英语教学管理决策提供科学、有效的数据依据。<br />
+            “翼课英语区域智能化测评解决方案B：翼课人机对话系统（机房版）”采用离在线结合的技术，智能化开展区域英语听说测评、人机对话听说考试，满足区域大规模听说测评需求。
+          </p>
+          <div index=2 class="note2_btn">应用案例</div>
+        </div>
+        <img src="https://res.ekwing.com/images/pc/index/index/note2_item3.png" alt="">
+      </li>
+      <li class="note2_content_li">
+        <div class="note2_content_title">
+          <p>“翼课网全场景智慧化英语学与教平台”是融合智能学伴、自动语言识别 ASR、自然语言处理NLP等技术及翼课教育大资源的“互联网＋
+            英语学习”整体解决方案。平台可以在网页电脑端、手机APP端、平板HD端等多终端使用，构建“人人皆学、处处能学、时时可学”的泛在学习环境。
+          </p>
+          <div index=3 class="note2_btn">应用案例</div>
+        </div>
+        <img src="https://res.ekwing.com/images/pc/index/index/note2_item4.png" alt="">
+      </li>
+    </ul>
+  </div>
+</div>
+<script src="https://res.ekwing.com/js/pc/index/index/note2.js"></script>    </div>
+    <div id="note3">
+      <!--
+ * @Author: heyouqin@moyi365.com
+ * @LastEditors: heyouqin@moyi365.com
+ * @Date: 2021-12-24 15:55:39
+ * @LastEditTime: 2022-01-11 14:18:58
+ * @Descripttion: file content
+-->
+<link rel="stylesheet" href="https://res.ekwing.com/css/pc/index/index/note3.css">
+<div class="note3Box">
+  <p class="note3_title">百城万校创新应用成果</p>
+  <ul class="note3_title_ul">
+    <li class="note3_title_li">
+      <p class="note3_title_data"><span id="countUp1" class="note3_title_data total_school_num"></span><span class="note3_title_data_unit">所</span></p>
+      <p class="note3_data_title">服务学校</p>
+    </li>
+    <li class="note3_title_li">
+      <p class="note3_title_data"><span id="countUp2" class="note3_title_data total_teacher_num"></span> <span class="note3_title_data_unit">位</span></p>
+      <p class="note3_data_title">服务教师</p>
+    </li>
+    <li class="note3_title_li">
+      <p class="note3_title_data"><span id="countUp3" class="note3_title_data total_student_num"></span><span class="note3_title_data_unit">位</span></p>
+      <p class="note3_data_title">服务学生</p>
+    </li>
+  </ul>
+  <div class="note3_content">
+    <div class="note3_map_box">
+      <img class="coor1 coor" src="https://res.ekwing.com/images/pc/index/index/coor.png" alt="">
+      <img class="coor2 coor" src="https://res.ekwing.com/images/pc/index/index/coor.png" alt="">
+      <img class="coor3 coor" src="https://res.ekwing.com/images/pc/index/index/coor.png" alt="">
+      <img class="coor4 coor" src="https://res.ekwing.com/images/pc/index/index/coor.png" alt="">
+      <img class="coor5 coor" src="https://res.ekwing.com/images/pc/index/index/coor.png" alt="">
+      <img class="coor6 coor" src="https://res.ekwing.com/images/pc/index/index/coor.png" alt="">
+      <img class="coor7 coor" src="https://res.ekwing.com/images/pc/index/index/coor.png" alt="">
+      <img class="coor8 coor" src="https://res.ekwing.com/images/pc/index/index/coor.png" alt="">
+      <img class="coor9 coor" src="https://res.ekwing.com/images/pc/index/index/coor.png" alt="">
+      <img class="coor10 coor" src="https://res.ekwing.com/images/pc/index/index/coor.png" alt="">
+      <img class="coor11 coor" src="https://res.ekwing.com/images/pc/index/index/coor.png" alt="">
+      <img class="coor12 coor" src="https://res.ekwing.com/images/pc/index/index/coor.png" alt="">
+      <img class="coor13 coor" src="https://res.ekwing.com/images/pc/index/index/coor.png" alt="">
+      <img class="coor14 coor" src="https://res.ekwing.com/images/pc/index/index/coor.png" alt="">
+      <div class="note3_map_Air_bubbles_box">
+        <div class="Air_bubbles_box">
+          <a index=0 href="javascript:;">
+            <div class="show_img_box">
+              <img class="show_img" src="https://res.ekwing.com/images/pc/index/index/cover-1.jpg" alt="">
+              <div class="note3_triangle"></div>
+            </div>
+            <div class="air_bubbles">
+            </div>
+          </a>
+          <p class="city">山东·烟台</p>
+        </div>
+      </div>
+      <div class="note3_map_Air_bubbles_box">
+        <div class="Air_bubbles_box">
+          <a index=1 href="javascript:;">
+            <div class="show_img_box">
+              <img class="show_img" src="https://res.ekwing.com/images/pc/index/index/cover-2.jpg" alt="">
+              <div class="note3_triangle"></div>
+            </div>
+            <div class="air_bubbles">
+            </div>
+          </a>
+          <p class="city">甘肃·平凉</p>
+        </div>
+      </div>
+      <div class="note3_map_Air_bubbles_box">
+        <div class="Air_bubbles_box">
+          <a index=2 href="javascript:;">
+            <div class="show_img_box">
+              <img class="show_img" src="https://res.ekwing.com/images/pc/index/index/cover-3.jpg" alt="">
+              <div class="note3_triangle"></div>
+            </div>
+            <div class="air_bubbles">
+            </div>
+          </a>
+          <p class="city">贵州·贵阳</p>
+        </div>
+      </div>
+      <div class="note3_map_Air_bubbles_box">
+        <div class="Air_bubbles_box">
+          <a index=3 href="javascript:;">
+            <div class="show_img_box">
+              <img class="show_img" src="https://res.ekwing.com/images/pc/index/index/cover-4.jpg" alt="">
+              <div class="note3_triangle"></div>
+            </div>
+            <div class="air_bubbles">
+            </div>
+          </a>
+          <p class="city">广东·广州</p>
+        </div>
+      </div>
+      <div class="note3_map_Air_bubbles_box">
+        <div class="Air_bubbles_box">
+          <a index=4 href="javascript:;">
+            <div class="show_img_box">
+              <img class="show_img" src="https://res.ekwing.com/images/pc/index/index/cover-5.jpg" alt="">
+              <div class="note3_triangle"></div>
+            </div>
+            <div class="air_bubbles">
+            </div>
+          </a>
+          <p class="city">广东·佛山</p>
+        </div>
+      </div>
+      <div class="note3_map_Air_bubbles_box">
+        <div class="Air_bubbles_box">
+          <a index=5 href="javascript:;">
+            <div class="show_img_box">
+              <img class="show_img" src="https://res.ekwing.com/images/pc/index/index/cover-6.jpg" alt="">
+              <div class="note3_triangle"></div>
+            </div>
+            <div class="air_bubbles">
+            </div>
+          </a>
+          <p class="city">广东·珠海</p>
+        </div>
+      </div>
+
+      <div class="note3_map_Air_bubbles_box">
+        <div class="Air_bubbles_box">
+          <a index=6 href="javascript:;">
+            <div class="show_img_box">
+              <img class="show_img" src="https://res.ekwing.com/images/pc/index/index/cover-7.jpg" alt="">
+              <div class="note3_triangle"></div>
+            </div>
+            <div class="air_bubbles">
+            </div>
+          </a>
+          <p class="city">湖南·湘西</p>
+        </div>
+      </div>
+      <div class="note3_map_Air_bubbles_box">
+        <div class="Air_bubbles_box">
+          <a index=7 href="javascript:;">
+            <div class="show_img_box">
+              <img class="show_img" src="https://res.ekwing.com/images/pc/index/index/cover-8.jpg" alt="">
+              <div class="note3_triangle"></div>
+            </div>
+            <div class="air_bubbles">
+            </div>
+          </a>
+          <p class="city">江西·鹰潭</p>
+        </div>
+      </div>
+      <div class="note3_map_Air_bubbles_box">
+        <div class="Air_bubbles_box">
+          <a index=8 href="javascript:;">
+            <div class="show_img_box">
+              <img class="show_img" src="https://res.ekwing.com/images/pc/index/index/cover-9.jpg" alt="">
+              <div class="note3_triangle"></div>
+            </div>
+            <div class="air_bubbles">
+            </div>
+          </a>
+          <p class="city">浙江·永康</p>
+        </div>
+      </div>
+      <div class="note3_map_Air_bubbles_box">
+        <div class="Air_bubbles_box">
+          <a index=9 href="javascript:;">
+            <div class="show_img_box">
+              <img class="show_img" src="https://res.ekwing.com/images/pc/index/index/cover-10.jpg" alt="">
+              <div class="note3_triangle"></div>
+            </div>
+            <div class="air_bubbles">
+            </div>
+          </a>
+          <p class="city">江苏·南通</p>
+        </div>
+      </div>
+      <div class="note3_map_Air_bubbles_box">
+        <div class="Air_bubbles_box">
+          <a index=10 href="javascript:;">
+            <div class="show_img_box">
+              <img class="show_img" src="https://res.ekwing.com/images/pc/index/index/cover-11.jpg" alt="">
+              <div class="note3_triangle"></div>
+            </div>
+            <div class="air_bubbles">
+            </div>
+          </a>
+          <p class="city">山东·菏泽</p>
+        </div>
+      </div>
+      <div class="note3_map_Air_bubbles_box">
+        <div class="Air_bubbles_box">
+          <a index=11 href="javascript:;">
+            <div class="show_img_box">
+              <img class="show_img" src="https://res.ekwing.com/images/pc/index/index/cover-12.jpg" alt="">
+              <div class="note3_triangle"></div>
+            </div>
+            <div class="air_bubbles">
+            </div>
+          </a>
+          <p class="city">山西·运城</p>
+        </div>
+      </div>
+      <div class="note3_map_Air_bubbles_box">
+        <div class="Air_bubbles_box">
+          <a index=12 href="javascript:;">
+            <div class="show_img_box">
+              <img class="show_img" src="https://res.ekwing.com/images/pc/index/index/cover-13.jpg" alt="">
+              <div class="note3_triangle"></div>
+            </div>
+            <div class="air_bubbles">
+            </div>
+          </a>
+          <p class="city">陕西·佛坪</p>
+        </div>
+      </div>
+      <div class="note3_map_Air_bubbles_box">
+        <div class="Air_bubbles_box">
+          <a index=13 href="javascript:;">
+            <div class="show_img_box">
+              <img class="show_img" src="https://res.ekwing.com/images/pc/index/index/cover-14.jpg" alt="">
+              <div class="note3_triangle"></div>
+            </div>
+            <div class="air_bubbles">
+            </div>
+          </a>
+          <p class="city">陕西·凤翔</p>
+        </div>
+      </div>
+      <div class="note3_map_Air_bubbles_box">
+        <div class="Air_bubbles_box">
+          <a index=14 href="javascript:;">
+            <div class="show_img_box">
+              <img class="show_img" src="https://res.ekwing.com/images/pc/index/index/cover-15.jpg" alt="">
+              <div class="note3_triangle"></div>
+            </div>
+            <div class="air_bubbles">
+            </div>
+          </a>
+          <p class="city">陕西·西安</p>
+        </div>
+      </div>
+    </div>
+    <div class="note3_content_left">
+      <ul class="note3_content_ul">
+        <li class="note3_content_li">
+          <div class="note3_content_title">
+            <div class="list_point"></div>学生累计答题
+          </div>
+          <p class="note3_content_data"><span id="countUp4" class="index_data1" style="font-family: Oswald-Regular;"></span><span class="note3_content_unit">道</span></p>
+        </li>
+        <li class="note3_content_li">
+          <div class="note3_content_title">
+            <div class="list_point"></div>进行口语评测
+          </div>
+          <p class="note3_content_data"><span id="countUp5" class="index_data2" style="font-family: Oswald-Regular;"></span><span class="note3_content_unit">次</span></p>
+        </li>
+        <li class="note3_content_li">
+          <div class="note3_content_title">
+            <div class="list_point"></div>智能练习批改
+          </div>
+          <p class="note3_content_data"><span id="countUp6" class="index_data3" style="font-family: Oswald-Regular;"></span><span class="note3_content_unit">次</span></p>
+        </li>
+        <li class="note3_content_li">
+          <div class="note3_content_title">
+            <div class="list_point"></div>机房考试/测评
+          </div>
+          <p class="note3_content_data"><span id="countUp7" class="index_data4" style="font-family: Oswald-Regular;"></span><span class="note3_content_unit">次</span></p>
+        </li>
+        <li class="note3_content_li">
+          <div class="note3_content_title">
+            <div class="list_point"></div>产生学习行为
+          </div>
+          <p class="note3_content_data"><span id="countUp8" class="index_data5" style="font-family: Oswald-Regular;"></span><span class="note3_content_unit">人次</span></p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<script src="https://res.ekwing.com/js/pc/index/index/note3.js"></script>    </div>
+    <div id="note4">
+      <!--
+ * @Author: heyouqin@moyi365.com
+ * @LastEditors: heyouqin@moyi365.com
+ * @Date: 2021-12-24 15:55:39
+ * @LastEditTime: 2022-01-11 14:49:16
+ * @Descripttion: file content
+-->
+<link rel="stylesheet" href="https://res.ekwing.com/css/pc/index/index/note4.css">
+<div class="note4Box">
+  <p class="note4_title">公益助学，让山里的孩子也能点击这个世界</p>
+  <div class="note4_content_box">
+    <ul class="note4_ul">
+      <li class="note4_li">
+        <div class="note4_li_img">
+        <div class="note4_bg_block"></div>
+        <img src="https://res.ekwing.com/images/pc/index/index/note5_img1.jpg" alt=""></div>
+        <div class="note4_li_text">
+          <p class="note4_num">01</p>
+          <p class="note4_num_title">2018年5月5日 启动希望工程“比翼行动”专项公益基金计划</p>
+          <p class="note4_num_content">
+            希望工程“比翼行动”教育信息化公益项目是由广州摩翼信息科技有限公司（翼课网）联合中国教育技术协会中小学外语教育信息化应用工作委员会等机构，在中国青少年发展基金会发起、设立。项目通过线上线下的立体化教师培训、学科教育信息化应用软硬件设备和图书捐赠、教育信息化课题研究及名师资源共享帮扶等方式，探索通过信息化手段推进教育脱贫攻坚的有效途径。项目实施三年以来，已惠及陕西、湖南、四川、河南、宁夏等省（自治区）约5800余名英语教师和约197955名学生。
+          </p>
+        </div>
+      </li>
+      <li class="note4_li">
+        <div class="note4_li_img">
+        <div class="note4_bg_block"></div>
+        <img src="https://res.ekwing.com/images/pc/index/index/note5_img2.jpg" alt=""></div>
+        <div class="note4_li_text">
+          <p class="note4_num">02</p>
+          <p class="note4_num_title">“网联优教”教育信息化精准扶贫项目</p>
+          <p class="note4_num_content">
+            “网联优教”教育信息化精准扶贫项目是由中央电化教育馆、中国网络社会组织为贯彻落实《中共中央国务院关于打赢脱贫攻坚战的决定》中关于教育精准扶贫的要求联合启动。广州摩翼信息科技有限公司（翼课网）以外语学科教师教育信息化培训为着力点，以全域覆盖的教育信息化软件捐赠应用为依托，支持和促进项目实施地区教育优质均衡发展。自2019年项目实施以来，已推动宁夏吴忠市、湖南岳阳市等地逾百所学校，上万名学生，教育信息化发展和外语水平的提升，促进乡村教育发展，助力脱贫攻坚。
+          </p>
+        </div>
+      </li>
+      <li class="note4_li">
+        <div class="note4_li_img">
+        <div class="note4_bg_block"></div>
+        <img src="https://res.ekwing.com/images/pc/index/index/note5_img3.png" alt=""></div>
+        <div class="note4_li_text">
+          <p class="note4_num">03</p>
+          <p class="note4_num_title">捐赠爱心图书，用知识成就教育梦想</p>
+          <p class="note4_num_content">翼课网联合中国教师发展基金会、北京师范大学外国语言文学学院、中国教育技术协会中小学外语教育信息化应用工作委员会等机构多次进行图书捐赠公益活动。
+          </p>
+        </div>
+      </li>
+      <li class="note4_li">
+        <div class="note4_li_img">
+        <div class="note4_bg_block"></div>
+        <img src="https://res.ekwing.com/images/pc/index/index/note5_img4.jpg" alt=""></div>
+        <div class="note4_li_text">
+          <p class="note4_num">04</p>
+          <p class="note4_num_title">支持共建藏粤课堂，开展教育信息化精准帮扶</p>
+          <p class="note4_num_content">
+            2018年9月，翼课网参与“共建藏粤课堂，开展教育信息化精准帮扶”活动，支持华南师范大学为西藏林芝捐赠信息化教学设备，致力通过产教融合开展教育信息化精准帮扶，共建信息化创新应用示范基地，服务林芝的教育信息化发展。
+          </p>
+        </div>
+      </li>
+      <li class="note4_li">
+        <div class="note4_li_img">
+        <div class="note4_bg_block"></div>
+        <img src="https://res.ekwing.com/images/pc/index/index/note5_img5.jpg" alt=""></div>
+        <div class="note4_li_text">
+          <p class="note4_num">05</p>
+          <p class="note4_num_title">希望工程“比翼行动”教育信息化公益项目在陕西省正式落地</p>
+          <p class="note4_num_content">
+            陕西省“比翼行动”项目自2018年10月12日至2019年12月8日，已经全部完成县级启动仪式，目前陕西14个项目县，已落实惠及62所学校，48230名学生的款物，举办7场外语教育信息化应用培训，现场参训教师累积2995人次。图为陕西省教育厅副厅长赵昶葆、宝鸡市人民政府副市长李瑛、中国青少年发展基金会代表王毅、陕西省少工委主任赵大胜等领导及项目县代表团一行考察凤翔县受捐赠学校竞存中学项目应用情况。
+          </p>
+        </div>
+      </li>
+      <li class="note4_li">
+        <div class="note4_li_img">
+        <div class="note4_bg_block"></div>
+        <img src="https://res.ekwing.com/images/pc/index/index/note5_img6.jpg" alt=""></div>
+        <div class="note4_li_text">
+          <p class="note4_num">06</p>
+          <p class="note4_num_title">捐资设立教师发展项目，助力教师信息化水平提升</p>
+          <p class="note4_num_content">
+            翼课网向中国教师发展基金会捐资，设立教师信息化水平提升项目。联合北京师范大学外国语言文学学院、中国教育技术协会中小学外语教育信息化应用工作委员会等机构，持续开展系列英语教师研修培训活动等行动，推动优质资源共享，促进全国各地英语教师信息素养提升。
+          </p>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="note4_btn_Box">
+    <div class="note4_btn note4_btn_left"><i class="iconfont">&#xe611;</i></div>
+    <ul class="note4_btn_ul">
+      <li class="note4_btn_li"><img src="https://res.ekwing.com/images/pc/index/index/note5_img1.jpg" alt=""></li>
+      <li class="note4_btn_li"><img src="https://res.ekwing.com/images/pc/index/index/note5_img2.jpg" alt=""></li>
+      <li class="note4_btn_li"><img src="https://res.ekwing.com/images/pc/index/index/note5_img3.png" alt=""></li>
+      <li class="note4_btn_li"><img src="https://res.ekwing.com/images/pc/index/index/note5_img4.jpg" alt=""></li>
+      <li class="note4_btn_li"><img src="https://res.ekwing.com/images/pc/index/index/note5_img5.jpg" alt=""></li>
+      <li class="note4_btn_li"><img src="https://res.ekwing.com/images/pc/index/index/note5_img6.jpg" alt=""></li>
+    </ul>
+    <div class="note4_btn note4_btn_right"><i class="iconfont">&#xe612;</i></div>
+  </div>
+  <a href="https://www.ekwing.com/site/aboutUs?page=2">
+  <div class="showMove showMove3">查看更多公益活动</div>
+  </a>
+</div>
+<script src="https://res.ekwing.com/js/pc/index/index/note4.js"></script>    </div>
+    <div id="ekMask">
+      <!--
+ * @Author: heyouqin@moyi365.com
+ * @LastEditors: heyouqin@moyi365.com
+ * @Date: 2021-12-22 09:54:29
+ * @LastEditTime: 2022-01-11 14:59:46
+ * @Descripttion: file content
+-->
+<link rel="stylesheet" href="https://res.ekwing.com/css/pc/index/comm/mask.css">
+<div class="mask">
+  <div class="maskBox">
+    <p class="mask_title"><span>翼课智慧课堂应用场景</span><i id="maskClose" class="iconfont font16">&#xe6e3;</i></p>
+    <!-- <div class="showAreaText">
+      <p class="mask_content">2018年4月开始，广东省佛山市和顺二中七年级教师借助鲲翼智慧课堂软硬件设备，将信息技术融入英语课堂，实现了“互联网 +
+        ”背景下的智慧化学与教。经过近一个学期的使用，学校全年级学生英语成绩进步显著，其中初中（6）班在100天内班级英语平均分整整提高30分。</p>
+      <div class="imgBox">
+        <div><img src="../images/mask_img1.png" alt=""></div>
+        <div><img src="../images/mask_img2.png" alt=""></div>
+      </div>
+    </div>
+    <div class="showAreaVideo">
+      <video controlslist="nodownload"  controls src="https://cdn-resource.ekwing.com/acpf/data/upload/bt/2021/02/24/6036089c1aaa8.mp4"></video>
+    </div> -->
+  </div>
+</div>
+<script src="https://res.ekwing.com/js/pc/index/comm/mask.js"></script>    </div>
+  </div>
+  <!-- 脚部内容区占位 -->
+  <div id="footer">
+    <!--
+ * @Author: heyouqin@moyi365.com
+ * @LastEditors: heyouqin@moyi365.com
+ * @Date: 2021-12-15 16:50:34
+ * @LastEditTime: 2022-01-11 14:57:23
+ * @Descripttion: file content
+-->
+<!-- 公共footer组件 -->
+<link rel="stylesheet" href="https://res.ekwing.com/css/pc/index/comm/footer.css">
+<style type="text/css">
+.hang_wrap{
+    position: fixed;
+    top: 24%;
+    right: 0;
+    z-index:4;
+    width: 50px;
+}
+.service_route{
+    width: 220px;
+    color: #fff;
+}
+.service_gif{
+    width: 50px;
+    height: 60px;
+    background: url("//www.ekwing.com/resource/com/images/service_gif1.gif?v1") no-repeat;
+    display: inline-block;
+    position: absolute;
+    margin-top: -60px;
+}
+.service_route_main dt, .service_route_main dd{
+    background: #40bb8a;
+    float: left;
+}
+.service_route_main dt{
+    width: 49px;
+    height: 106px;
+    margin-right: 1px;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 3px 0 0 3px;
+}
+.service_route_main dt span{
+    width: 20px;
+    line-height: 21px;
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: 9px;
+    display: inline-block;
+}
+.service_route_main dd{
+    width: 170px;
+    text-align: center;
+}
+.service_route_btn{
+    height: 35px;
+    line-height: 34px;
+    padding-left: 46px;
+    margin: 16px 0;
+    font-size: 18px;
+    font-weight: 400;
+    background: url("//www.ekwing.com/resource/com/images/service_route_btn.png?v1") no-repeat;
+    display: inline-block;
+    text-align: left;
+    color: #fff !important ;
+    padding-right:16px;
+}
+.service_route_btn:hover{background: url("//www.ekwing.com/resource/com/images/service_route_btn.png?v1") no-repeat 0 -35px; color: #FFF;}
+.service_route_main p{
+    font-size: 12px;
+    height: 38px;
+    line-height: 38px;
+    margin: 0 12px 0 14px;
+    border-top: 1px solid #58d2a1;
+}
+.service_route_main p span{
+    font-size: 14px;
+    font-family: Arial;
+    padding-left: 2px;
+}
+
+.service_route_box .service_route_main dt, .service_route_box .service_route_main dd{
+    background: #3182da;
+    float: left;
+}
+.service_route_box .service_route_main p{
+    border-top: 1px solid #65a6ec;
+}
+.service_route_box .service_gif{
+    background: url("//www.ekwing.com/resource/com/images/service_gif2.gif") no-repeat;
+}
+</style>
+<div class="footer">
+  <div class="footer_wrapper">
+    <div class="footer_top">
+      <ul id="footer_ul">
+        <li><a href="https://www.ekwing.com/about/aboutus">关于我们</a></li>
+        <li><a href="https://www.ekwing.com/about/employment">加入我们</a></li>
+        <li><a href="https://www.ekwing.com/about/newService">服务条款</a></li>
+        <li><a href="https://www.ekwing.com/about/private">隐私保护</a></li>
+      </ul>
+      <p>客服电话：400-013-0081 <span>（每天9:00-22:00）</span></p>
+    </div>
+    <div class="footer_bottom">
+      <div class="footer_bottom_left">
+        <p class="footer_bottom_left_title">合作伙伴：</p>
+        <a href="http://www.ekwfly.com"><img src="https://res.ekwing.com/images/pc/index/index/ef.png" /></a>
+        <a href="https://app.sybrank.com"><img src="https://res.ekwing.com/images/pc/index/index/bilingual.png" /></a>
+        <a href="https://www.aliyun.com"><img src="https://res.ekwing.com/images/pc/index/index/ali.png" /></a>
+        <a href="https://www.100efly.com/"><img src="https://res.ekwing.com/images/pc/index/index/zeevien.png" /></a>
+      </div>
+      <div class="img">
+        <a href="javascript:;">
+          <img src="https://res.ekwing.com/images/pc/index/index/wechar.png" alt="">
+          <img class="qr" src="https://res.ekwing.com/images/pc/index/index/qr.png" alt="">
+        </a>
+      </div>
+    </div>
+    <p class="footer_title">Copyright©2014-2019 Ekwing. All Rights Reserved.<a  href="https://www.beianx.cn/">粤ICP备14042221号</a> <img src="https://res.ekwing.com/images/pc/index/index/an.png" /><a href="https://beian.miit.gov.cn/">粤公网安备44011302000555</a> </p>
+  </div>
+</div>
+<div class="hang_wrap">
+    <div class="w50">
+    <div class="service_route">
+        <span class="service_gif"></span>
+        <dl class="service_route_main fix">
+            <dt><span>在线客服</span></dt>
+            <!-- <dd><a href="javascript:NTKF.im_openInPageChat('kf_9431_1477552391721');" class="service_route_btn">在线咨询</a></dd> -->
+            <dd><a class="service_route_btn" onclick="qimoChatClick();">在线咨询</a></dd>
+            <dd><p>电话客服:<span>400-013-0081</span></p></dd>
+        </dl>
+    </div>
+    </div>
+</div>
+<script src="https://res.ekwing.com/js/pc/index/comm/footer.js"></script>
+
+
+<!-- Piwik -->
+<script type="text/javascript">
+<!--  助教层 -->
+$(window).ready(function() {
+    //获取url参数
+    function getUrlParm (name){
+        var reg = new RegExp("(?:^|&)" + name + "=([^&]*)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) {
+            return unescape(decodeURI(r[1]));
+        } 
+        return null;
+    }
+    var pageSource = getUrlParm("pagefrom");
+    var isWingClass = document.cookie.indexOf('pagefrom=wingclass') != -1;
+    if(isWingClass || pageSource === "wingclass"){
+        $("#new_footer").hide();
+        if(isWingClass) {
+            $(".lh44.g6.f12").hide();
+        }
+    }
+    $(".service_route").mouseenter(function(){
+        $(this).stop();
+        $(this).animate({"margin-left": '-170px'});
+    });
+    $(".service_route").mouseleave(function(){
+        $(this).stop();
+        $(this).animate({"margin-left": '0px'});
+    });
+
+    //判断是学生做特殊处理
+    if ($ && $("#new_header-s").size() > 0) {
+        $(".service_route").addClass("service_route_box");
+    }
+    <!--回到顶部-->
+    (function(){
+        var bt = $('#ekBackTop').hide();
+         $(window).scroll(function() {
+            var st = $(window).scrollTop();
+            if(st > 200){
+                bt.show();
+            }else{
+                bt.hide();
+            };
+        });
+
+        $(".ek-back-top").mouseenter(function () {
+            if ($(this).find("span").length > 0)return;
+            $(this).html("<span>返回顶部</span>");
+        }).mouseleave(function () {
+            $(this).html("<i class='iconfont'>&#xe62d;</i>");
+        }).click(function(){
+            $(window).scrollTop(0);
+        });
+    })();
+});
+<!-- end -->
+var _paq = _paq || [];
+_paq.push(['trackPageView']);
+_paq.push(['enableLinkTracking']);
+(function() {
+	var u=(("https:" == document.location.protocol) ? "https" : "http") + "://data.ekwing.com/";
+	_paq.push(['setTrackerUrl', u+'piwik.php']);
+	_paq.push(['setSiteId', 1]);
+ 	var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
+ 	g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+})();
+</script>
+<noscript><p><img src="http://data.ekwing.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+<!-- start baidu hm-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+     var hm = document.createElement("script");
+     hm.src = "//hm.baidu.com/hm.js?b4c8ad78a28febf2e2e8a8d38c14165f";
+     var s = document.getElementsByTagName("script")[0]; 
+     s.parentNode.insertBefore(hm, s);
+ })();
+</script>
+<!-- End baidu hm -->
+<script type="text/javascript">
+            var tq_clientname = '';
+    </script>
+<script type="text/javascript">
+$(".weixin").mouseover(function(){
+	$(".wx184Box").show();
+});
+
+$(".weixin").mouseout(function(){
+	$(".wx184Box").hide();
+});
+
+//小能参数
+// var xiaoneng_uid = "";
+// var xiaoneng_uname = "游客";
+// var xiaoneng_vip = "0";
+// var xiaoneng_userlevel = "0";
+// console.log(tq_clientname);
+// var objXiaoNeng = $.parseJSON(tq_clientname);
+// console.log(objXiaoNeng);
+// if (objXiaoNeng) {
+//     xiaoneng_uid = objXiaoNeng.uid;
+//     xiaoneng_uname = objXiaoNeng.uname;
+//     xiaoneng_vip = objXiaoNeng.is_vip;
+//     xiaoneng_userlevel = objXiaoNeng.userlevel;
+// }
+// var NTKF_PARAM ={
+//     "siteid":"kf_9431" /*网站siteid*/,
+//     "settingid":"kf_9431_1477552391720" /*代码ID*/, 
+//     "uid": xiaoneng_uid/*会员ID*/,
+//     "uname": xiaoneng_uname/*会员名*/,
+//     "isvip": xiaoneng_vip,    
+//     "userlevel": xiaoneng_userlevel/*会员等级*/
+// }
+// // 容联七陌参数
+// var qimoClientId  = {};
+// if(xiaoneng_uid ===""){
+//     qimoClientId.nickName = xiaoneng_uname;
+//     qimoClientId.customField = {
+//         '身份':'游客',
+//     }
+
+// }else{
+//     qimoClientId.userId = xiaoneng_uid;
+//     qimoClientId.nickName = xiaoneng_uname;
+//     qimoClientId.customField = {
+//         'UID':xiaoneng_uid,
+//         '姓名':xiaoneng_uname,
+//     }
+//     if(xiaoneng_vip === 1){
+//         qimoClientId.customField['是否是VIP'] = '是';
+//         qimoClientId.customField['VIP等级'] = xiaoneng_userlevel;
+//     }else{
+//         qimoClientId.customField['是否是VIP'] = '否';
+//     }
+//     console.log(qimoClientId);
+// }
+
+//七陌
+var qimo_uid = "";
+var qimo_uname = "游客";
+var qimo_vip = "0";
+var qimo_userlevel = "0";
+//console.log(tq_clientname);
+// var objQiMo = $.parseJSON(tq_clientname);
+var objQiMo = tq_clientname;
+// console.log(objQiMo);
+
+if (objQiMo) {
+    qimo_uid = objQiMo.uid;
+    qimo_uname = objQiMo.uname;
+    qimo_vip = objQiMo.is_vip;
+    qimo_userlevel = objQiMo.userlevel;
+    qimo_usertype = objQiMo.user_type;
+    qimo_section = objQiMo.section;
+    qimo_tel = objQiMo.tel;
+    qimo_parenttel = objQiMo.parent_tel;
+    qimo_viptype = objQiMo.vip_type;
+    qio_gender = objQiMo.gender;
+
+}
+var NTKF_PARAM ={
+    "siteid":"kf_9431" /*网站siteid*/,
+    "settingid":"kf_9431_1477552391720" /*代码ID*/, 
+    "uid": qimo_uid/*会员ID*/,
+    "uname": qimo_uname/*会员名*/,
+    "isvip": qimo_vip,    
+    "userlevel": qimo_userlevel/*会员等级*/
+}
+// 容联七陌参数
+var qimoClientId  = {};
+if(qimo_uid ===""){
+    qimoClientId.nickName = qimo_uname;
+    qimoClientId.customField = {
+        '身份':'游客',
+    }
+
+}else{
+    qimoClientId.userId = qimo_uid;
+    qimoClientId.nickName = qimo_uname;
+    qimoClientId.customField = {
+        '身份': qimo_usertype,
+        '姓名':qimo_uname,
+        '学段':qimo_section,
+        '性别':qio_gender,
+        '学生电话':qimo_tel,
+        '家长电话':qimo_parenttel,
+        'UID':qimo_uid,
+    }
+    if(qimo_vip === 1){
+        qimoClientId.customField['是否是vip'] = '是';
+        qimoClientId.customField['vip类型'] = qimo_viptype;
+        qimoClientId.customField['vip等级'] = qimo_userlevel;
+    }else{
+        qimoClientId.customField['是否是VIP'] = '否';
+    }
+    //console.log(qimoClientId);
+}
+/*var qimoClientId = {
+    userId: xiaoneng_uid,
+    nickName:xiaoneng_uname,
+};*/
+</script>
+<!-- <script type="text/javascript" src="https://dl.ntalker.com/js/xn6/ntkfstat.js?siteid=kf_9431" charset="utf-8" defer="defer"></script> -->
+
+<!-- 七陌客服 -->
+<!-- <script type='text/javascript' src='https://webchat.7moor.com/javascripts/7moorInit.js?accessId=5f0f07f0-f16d-11e8-8f8c-a91ca374c015&autoShow=false&language=ZHCN' async='async'>
+</script> -->
+<!-- language用于控制访客端展示的语言类型，language=ZHCN为中文，language=EN为英文，您可按需设置一种语言类型 -->
+<script>
+    if($(".menu_item.pointer").length > 0){
+        $(".menu_item.pointer").css({"display":"none"});
+    }
+    if($(".service_route_btn").length > 0){
+        $(".service_route_btn").css({"display":"none"});
+    }
+    setTimeout(function(){
+        console.log("qimo loading...")
+        var script = document.createElement("script");
+        script.type = "text/javascript";
+        script.src="https://webchat.7moor.com/javascripts/7moorInit.js?accessId=5f0f07f0-f16d-11e8-8f8c-a91ca374c015&autoShow=false&language=ZHCN";
+        script.async="async";
+        document.body.append(script);
+        if($(".menu_item.pointer").length > 0){
+            $(".menu_item.pointer").css({"display":"inline-block"});
+        }
+        if($(".service_route_btn").length > 0){
+            $(".service_route_btn").css({"display":"inline-block"});
+        }
+    }, 3000)
+    var trackInfo = {
+        uid:  '',
+        nicename: '',
+        username: '',
+        schoolname: '',
+        student_appkey: '',
+        teacher_appkey: '',
+        administrationKey: ''
+
+    };
+</script>
+
+
+  </div>
+  <script>
+    function setCookie(cname, cvalue, exdays) {
+      console.log("保存cookie");
+      var d = new Date();
+      d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+      var expires = "expires=" + d.toGMTString();
+      document.cookie = cname + "=" + cvalue + "; " + expires;
+    }
+    $("#jsLoginBtn").click(function () {
+      if ($("#memberPass").prop("checked")) {
+        var username = $("#name").val();
+        var password = $("#password").val();
+        setCookie("memberPass", true, 7)
+        setCookie("username", username, 7)
+        setCookie("password", password, 7)
+      } else {
+        setCookie("memberPass", false, 0)
+        setCookie("username", "", 0)
+        setCookie("password", "", 0)
+      }
+    })
+    function getCookie(cname) {
+      var name = cname + "=";
+      var ca = document.cookie.split(';');
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i].trim();
+        if (c.indexOf(name) == 0) { return c.substring(name.length, c.length); }
+      }
+      return "";
+    }
+
+    $("#login").on("click", ".pte_user_menu li", function () {
+      var rem = getCookie('memberPass');
+      console.log(3333333);
+      if (rem) {
+        $("#memberPass").prop("checked", true);
+        $("#pass_userName").val(getCookie('pass_userName'));
+        $("#pass_password").val(getCookie('pass_password'));
+      }
+    })
+    $("#pass_login_submit").click(function () {
+      if ($("#pass_member").prop("checked")) {
+        var pass_userName = $("#pass_userName").val();
+        var pass_password = $("#pass_password ").val();
+        setCookie("memberPass", true, 7)
+        setCookie("pass_userName", pass_userName, 7)
+        setCookie("pass_password ", pass_password, 7)
+      } else {
+        setCookie("memberPass", false, 0)
+        setCookie("pass_password", "", 0)
+        setCookie("pass_userName", "", 0)
+      }
+    })
+  </script>
+</body>
+
+</html>
