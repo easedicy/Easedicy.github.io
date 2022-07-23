@@ -1,0 +1,101 @@
+
+<!--
+ * @Author: heyouqin@moyi365.com
+ * @LastEditors: heyouqin@moyi365.com
+ * @Date: 2021-12-15 16:39:54
+ * @LastEditTime: 2022-03-23 11:04:57
+ * @Descripttion: file content
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+  content="114514翼课网 https://easedtomcat908.github.io/ekwing.html" />
+  <title>翼课网，掌握114514之道</title>
+  <link rel="icon" href="https://easedtomcat908.github.io/ekwing.html">
+  <link href="https://easedtomcat908.github.io/ekwing.html" rel="stylesheet" type="text/css" />
+  <link href="https://easedtomcat908.github.io/ekwing.html" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://easedtomcat908.github.io/ekwing.html">
+  <link rel="stylesheet" href="https://easedtomcat908.github.io/ekwing.html">
+  <link rel="stylesheet" href="https://easedtomcat908.github.io/ekwing.html">
+  <script type="text/javascript" src="https://easedtomcat908.github.io/ekwing.html"></script>
+  <script type="text/javascript" src="https://easedtomcat908.github.io/ekwing.html"></script>
+  <script type="text/javascript" src="https://easedtomcat908.github.io/ekwing.html"></script>
+  <script type="text/javascript" src="https://easedtomcat908.github.io/ekwing.html"></script>
+  <script type="text/javascript" src="https://easedtomcat908.github.io/ekwing.html"></script>
+  <script type="text/javascript" src="https://easedtomcat908.github.io/ekwing.html"></script>
+  <script type="text/javascript" src="https://easedtomcat908.github.io/ekwing.html"></script>
+  <script type="text/javascript" src="https://easedtomcat908.github.io/ekwing.html"></script>
+  <script type="text/javascript" src="https://easedtomcat908.github.io/ekwing.html"></script>
+  <script type="text/javascript" src="https://easedtomcat908.github.io/ekwing.html"></script>
+  <script src="https://easedtomcat908.github.io/ekwing.html"></script>
+
+
+  <script defer type="text/javascript">
+    var __ROOT__ = "https://easedtomcat908.github.io/ekwing.html/";
+    var __LOGINDOMAIN = "https://easedtomcat908.github.io/ekwing.html";
+    require.config({
+      paths: {
+        login: 'https://easedtomcat908.github.io/ekwing.html',
+        "countUp": "https://easedtomcat908.github.io/ekwing.html",
+      },
+    });
+    require(['countUp', "login"], function (CountUp) {
+      var options = {
+        useEasing: true,
+        useGrouping: true,
+        separator: ',',
+        decimal: '.',
+        prefix: '',
+        suffix: ''
+      };
+      countUp1 = null
+
+      $.get(
+        'https://easedtomcat908.github.io/ekwing.html',
+        {},
+        function (data, textStatus, jqXHR) {
+          countUp1 = new CountUp("countUp1", 0, data.data.total_school_num, 0, 2.5, options);
+          countUp2 = new CountUp("countUp2", 0, data.data.total_teacher_num, 0, 2.5, options);
+          countUp3 = new CountUp("countUp3", 0, data.data.total_student_num, 0, 2.5, options);
+          countUp4 = new CountUp("countUp4", 0, data.data.stu_ques_num, 0, 2.5, options);
+          countUp5 = new CountUp("countUp5", 0, data.data.spoken_eval_num, 0, 2.5, options);
+          countUp6 = new CountUp("countUp6", 0, data.data.correct_num, 0, 2.5, options);
+          countUp7 = new CountUp("countUp7", 0, data.data.test_num, 0, 2.5, options);
+          countUp8 = new CountUp("countUp8", 0, data.data.learn_num, 0, 2.5, options);
+          $(window).scroll(function () {
+            if ($(window).scrollTop() >= 2700 && $(window).scrollTop() <= 3200  && countUp1 !== null) {
+              countUp1.start();
+              countUp2.start();
+              countUp3.start();
+              countUp4.start();
+              countUp5.start();
+              countUp6.start();
+              countUp7.start();
+              countUp8.start();
+            }
+          })
+          // $('.index_data1').text(data.data.stu_ques_num);
+          // $('.index_data2').text(data.data.spoken_eval_num);
+          // $('.index_data3').text(data.data.correct_num);
+          // $('.index_data4').text(data.data.test_num);
+          // $('.index_data5').text(data.data.learn_num);
+          // $('.total_school_num').text(data.data.total_school_num);
+          // $('.total_teacher_num').text(data.data.total_teacher_num);
+          // $('.total_student_num').text(data.data.total_student_num);
+        },
+        'json'
+      );
+
+
+      function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+          var c = ca[i].trim();
+          if (c.indexOf(name) == 0) { return c.substring(name.le
