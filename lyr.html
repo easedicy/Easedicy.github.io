@@ -7,7 +7,53 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css">
 </head>
 
-<body>
-<div class="ql-container ql-snow"><div class="ql-editor"><h1 class="ql-align-center"><em style="color: rgb(68, 68, 68);">lyr介绍：</em></h1><h2 class="ql-align-center"><strong style="background-color: rgb(255, 255, 0); color: rgb(230, 0, 0);" class="ql-size-large"><em><s>LYRSB lyrsb LYRSB</s></em></strong></h2><p class="ql-align-center"><a href="https://vdse.bdstatic.com//192d9a98d782d9c74c96f09db9378d93.mp4?authorization=bce-auth-v1/40f207e648424f47b2e3dfbb1014b1a5/2021-07-12T02:14:24Z/-1/host/530146520a1c89fb727fbbdb8a0e0c98ec69955459aed4b1c8e00839187536c9" rel="noopener noreferrer" target="_blank"><strong>详情请点击此处观看</strong></a></p></div></div>
+<body bgcolor="lightpink">
+<div class="ql-container ql-snow"><div class="ql-editor"><h1 class="ql-align-center"><em style="color: rgb(68, 68, 68);"> l y r 介 绍 ：</em></h1><h2 class="ql-align-center"><strong style="background-color: rgb(255, 255, 0); color: rgb(230, 0, 0);" class="ql-size-large"><em><s>LYRSB lyrsb LYRSB</s></em></strong></h2><p class="ql-align-center"><a href="https://vdse.bdstatic.com//192d9a98d782d9c74c96f09db9378d93.mp4?authorization=bce-auth-v1/40f207e648424f47b2e3dfbb1014b1a5/2021-07-12T02:14:24Z/-1/host/530146520a1c89fb727fbbdb8a0e0c98ec69955459aed4b1c8e00839187536c9" rel="noopener noreferrer" target="_blank"><strong>详情请点击此处观看</strong></a></p></div></div>
+<center><p2>你看下面这个数字是什么(doge)</p2></senter>
+<canvas id="canvas"></canvas>
+<style type="text/css">
+    body{margin: 0; padding: 0; overflow: hidden;}
+</style>
+<script type="text/javascript">
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+ 
+ 
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+ 
+    var texts = '114514'.split('');
+ 
+    var fontSize = 16;
+    var columns = canvas.width/fontSize;
+    // 用于计算输出文字时坐标，所以长度即为列数
+    var drops = [];
+    //初始值
+    for(var x = 0; x < columns; x++){
+        drops[x] = 1;
+    }
+ 
+        function draw(){
+        //让背景逐渐由透明到不透明
+        ctx.fillStyle = 'rgba(60, 100, 255, 0.04)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        //文字颜色
+        ctx.fillStyle = '#0F0';
+        ctx.font = fontSize + 'px arial';
+        //逐行输出文字
+        for(var i = 0; i < drops.length; i++){
+            var text = texts[Math.floor(Math.random()*texts.length)];
+            ctx.fillText(text, i*fontSize, drops[i]*fontSize);
+ 
+            if(drops[i]*fontSize > canvas.height || Math.random() > 0.95){
+                drops[i] = 0;
+            }
+ 
+            drops[i]++;
+        }
+    }
+ 
+    setInterval(draw, 33);
+</script>
 </body>
 </html>
