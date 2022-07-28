@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>		<meta charset="utf-8" />
+
+		<title>Li Shu's site</title>
+
+		<link href="img/title.ico" rel="shortcut icon"/>
+
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+		<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+		<style type="text/css">
+
+			html{
+
+				position: relative;
+
+			}
+
+			.top{
+
+				background-color: #FFFFFF;
+
+				height: 60px;
+
+				width: 1900px;
+
+				position: absolute;
+
+				top: 0;
+
+				left: 0;
+
+			}
+
+			.top h1{
+
+				padding-left: 150px;
+
+				font-family: "华文新魏";
+
+			}
+
+			.top-left{
+
+				width: 250px;
+
+				height: 50px;
+
+			}
+
+			.top-left span{
+
+				position: absolute;
+
+				top: 15px;
+
+				left: 250px;
+
+				font-family: "华文新魏";
+
+				font-size: 28px;
+
+				color: pink;
+
+				float: left;
+
+				display: none;
+
+			}
+
+			.top-left:hover span{
+
+				display: block;
+
+			}
+
+			.top1{
+
+				position: absolute;
+
+				top: 0px;
+
+				left: 600px;
+
+				padding: 20px;
+
+				font-family: "华文新魏";
+
+				font-size: 30px;
+
+			}
+
+			.top2{
+
+				position: absolute;
+
+				top: 0px;
+
+				left: 800px;
+
+				padding: 20px;
+
+				font-family: "华文新魏";
+
+				font-size: 30px;
+
+			}
+
+			.top3{
+
+				position: absolute;
+
+				top: 0px;
+
+				left: 1050px;
+
+				padding: 20px;
+
+				font-family: "华文新魏";
+
+				font-size: 30px;
+
+			}
+
+			.top4{
+
+				position: absolute;
+
+				top: 0px;
+
+				left: 1300px;
+
+				padding: 20px;
+
+				font-family: "华文新魏";
+
+				font-size: 30px;
+
+			}
+
+			a{
+
+				text-decoration: none;
+
+				color: black;
+
+			}
+
+			a:hover{
+
+				text-decoration: none;
+
+				color:  orange;
+
+			}
+
+			a:active{
+
+				text-decoration: line-through;
+
+				color: cadetblue;
+
+			}
+
+			.top-right{
+
+					position: absolute;
+
+					top: 0px;
+
+					right: 30px;
+
+					padding: 20px;
+
+					font-family: "华文新魏";
+
+					font-size: 20px;
+
+			}
+
+			.top img{
+
+				width: 40px;
+
+				height: 40px;
+
+				border-radius: 25px;
+
+				position: absolute;
+
+				top: 5px;
+
+				right: 0px;
+
+			}
+
+			.top-right1{
+
+					position: absolute;
+
+					top: -4px;
+
+					right: -150px;
+
+					padding: 20px;
+
+			}
+
+			.top-right1 input{
+
+				font-family: "华文新魏";
+
+				font-size: 20px;
+
+				border-radius: 8px;
+
+			}
+
+			.main{
+
+				position: absolute;
+
+				top: 60px;
+
+				left: 0;
+
+				background-image: url(img/人生背景.jpg);
+
+				background-repeat: no-repeat;
+
+				background-size: cover;
+
+				background-attachment: fixed;
+
+				width: 2133px;
+
+				height: 1190px;
+
+			}
+
+			.center-head{
+
+				position: absolute;
+
+				top: 30px;
+
+				left: 650px;
+
+				width: 850px;
+
+				height: 200px;
+
+				border-radius: 20px;
+
+				background:rgba(250,250,250,0.5);
+
+				opacity: 0.8;
+
+			}
+
+			.center-head img{
+
+				width: 100px;
+
+				height: 100px;
+
+				border-radius: 100px;
+
+				position: absolute;
+
+				top: 40px;
+
+				left: 75px;
+
+			}
+
+			.center-head #name{
+
+				position: absolute;
+
+				top: 150px;
+
+				left: 75px;
+
+				text-align: center;
+
+				font-family: "华文新魏";
+
+				font-size: 17px;
+
+			}
+
+			.span ul{
+
+				width: 700px;
+
+				height: 200px;
+
+				position: absolute;
+
+				left: 850px;
+
+				top: 200px;
+
+				list-style-type: none;
+
+			}
+
+			.pane{
+
+				position: relative;
+
+				top: -186px;
+
+				font-family: "华文新魏";
+
+				font-size: 17px;
+
+				padding-top: 85px;
+
+				text-align: center;
+
+				width: 203.5px;
+
+				height: 115px;
+
+				float: left;
+
+			}
+
+			.pane:hover{
+
+				background: rgba(0,0,0,0.5);
+
+			}
+
+			.span li:last-child{
+
+				border-top-right-radius: 20px;
+
+				border-bottom-right-radius: 20px;
+
+			}
+
+			.center{
+
+				overflow:auto;
+
+				position: absolute;
+
+				top: 250px;
+
+				left: 650px;
+
+				width: 850px;
+
+				height: 850px;
+
+				border-radius: 20px;
+
+				background:rgba(250,250,250,0.8);
+
+				opacity: 0.8;
+
+			}
+
+			.center iframe{
+
+				border-radius: 20px;
+
+			}
+
+			#showtime1{
+
+					position: absolute;
+
+					left: 30px;
+
+					bottom: 20px;
+
+					color: #517693;
+
+					font-size: 28px;
+
+					font-weight: bold;
+
+					font-family: "华文新魏";
+
+					}
+
+			#showtime2{
+
+					position: absolute;
+
+					left:40px;
+
+					bottom: -15px;
+
+					color: #517693;
+
+					font-size: 25px;
+
+					font-weight: bold;
+
+					font-family: "华文新魏";
+
+					}
+
+			.time{
+
+				position: absolute;
+
+				right: 30px;
+
+				bottom: 5px;
+
+				color: #517693;
+
+				font-size: 28px;
+
+				font-weight: bold;
+
+				font-family: "华文新魏";
+
+				}
+
+			.bottom
+
+			{
+
+				position: absolute;
+
+				top: 1050px;
+
+				width: 2110px;
+
+				height: 85px;
+
+			}
+
+		</style>
+
+	</head>
+
+	<body>
+
+		<div class="top">
+
+			<div class="top-left">
+
+				<h1 style="font-size:25px">阿巴阿巴 </h1>
+
+				<span> ·   emmm…</span>
+
+			</div>
+
+			<a class="top1" href="home page.html">首页</a>
+
+			<a class="top2" href="lyr.html">lyr的介绍</a>
+
+			<a class="top3" href="114514.html">lyr的绿头发</a>
+
+			<a class="top4" href="home.html">旧主页</a>
+
+			<span class="top-right">YH</span>
+
+			<img src="img/头像.jpg" title="头像" alt="头像" />
+
+			<span class="top-right1"><input type="submit" value="Login"></span>
+
+		</div>
+
+		<div class="main">
+
+			<div class="main-center">
+
+				<div class="center-head">
+
+					<a href="home2.html" target="frame"><img src="img/头像.jpg" alt="头像" title="头像" /></a>
+
+					<span id="name">YH<br/>非常热爱生活</span>
+
+				</div>
+
+			</div>
+
+				<div class="span">
+
+					<ul>
+
+						<li class="pane"><a href="about.html" ta
