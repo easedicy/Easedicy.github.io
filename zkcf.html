@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+
+
+    <title>2023韶关中考查分网站</title>
+    <style>
+    
+        body {
+            background: linear-gradient(to right, #8cb6de, #93edc7);
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        h1 {
+            color: #e0e45e;
+            font-size: 4rem;
+            margin: 0;
+            padding: 0;
+        }
+        form {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            margin-top: 2rem;
+        }
+        #exam-number {
+            border: none;
+            border-radius: 1rem;
+            padding: 1rem;
+            font-size: 2rem;
+            margin-right: 1rem;
+            box-shadow: 0 0 1rem rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+        }
+        #submit-button {
+            border: none;
+            border-radius: 1rem;
+            padding: 1rem 2rem;
+            font-size: 2rem;
+            background-color: #e0e45e;
+            color: #fff;
+            box-shadow: 0 0 1rem rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+        }
+         #score-table {
+        display: none;
+        margin-top: 2rem;
+        border-collapse: collapse; /* 设置边框合并 */
+        border-radius: 20px; /* 设置边框圆润 */
+        overflow: hidden; /* 隐藏边界溢出的内容 */
+        width: 60%; /* 设置表格宽度 */
+        font-family: Arial, sans-serif; /* 设置字体样式 */
+        text-align: center; /* 设置文字居中对齐 */
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* 添加阴影效果 */
+    }
+    
+
+    #score-table th,
+    #score-table td {
+        border: 1.5px solid #ccc; /* 设置边框样式和颜色 */
+        padding: 1rem;
+    }
+
+    #score-table th {
+        background-color: #e0e45e;
+        color: #fff;
+        font-weight: bold; /* 设置表头文字加粗 */
+    }
+    
+    #score-table tr {
+        background-color: #fbfdf1; /* 设置表格行的背景颜色 */
+    }
+
+    #score-table tr:hover {
+        background-color: #f4fbda; /* 设置鼠标悬停时的背景色 */
+    }
+    </style>
+    
+    <style>
+        canvas {
+            position: fixed;
+            top: 0;
+    </style>
+
+
+    
+    
+</head>
+
+
+
+<body>
+
+
+    <!-- js -->
+    <script type="module" src="index.js"></script>
+    <script type="module" src="proxy.js"></script>
+
+<script>
+	            var stop, staticx;
+				var img = new Image();
+				img.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADsAAAA7CAYAAADFJfKzAAAABHNCSVQICAgIfAhkiAAAAcdJREFUaIHt2aFOw1AUBuD/AGYegSETCCwkGJIlJDieAIEgQSOW8BDjDbAMhyBDExIQSAIIEsSWIBAISAAzBGw/YlVsXdp7TnsZOZ9btnN6/tz2pu0A55xzzjnnnHP/hJRxEJI1ABsAVgHMA5hNvnoF8ASgA+BIRK7KmMccySrJE5JdZvdFsk1yM/b8mSUh+zlCjtIlWY+dJVWymm/KkL/dxM41hGSN+U7ZPNoWM5psUCSrAB4AVCz6pbgTkWVNgymjQc5RbFAAWGLsa5hkvaBTd5SuZlaLld016JFVRbO6qrAc3CwsaHoE2A4t1K7snrI+xGJooWo3JvkMYE7TI4SIBM2tXdmid2BT2pXta3uEiLWypQcF8BFaqA3bU9aHeAwt1IZ9UdaHaIYWaq/ZSwBrmh459URkJrRYu7IHyvq87jXFqrAicoxyr9tDTbHFvbFqgJxONcVWz7PfAKYteo1xISLrmgZWz7NbRn3S9AHsFHyM7Ei2CnyO3Y+dbwjJTgFBz2LnSkXy1jCoakMqBcmGQdBG7ByZcfBqNeS07nDwtnLyJKFbJD/HBHxPflMrcpbSH9GSQCvJx+uJ/TPLOeecc8455/6cH3UxoDE5gqtaAAAAAElFTkSuQmCC";
+	 
+				function Sakura(x, y, s, r, fn) {
+					this.x = x;
+					this.y = y;
+					this.s = s;
+					this.r = r;
+					this.fn = fn;
+				}
+	 
+				Sakura.prototype.draw = function(cxt) {
+					cxt.save();
+					var xc = 40 * this.s / 4;
+					cxt.translate(this.x, this.y);
+					cxt.rotate(this.r);
+					cxt.drawImage(img, 0, 0, 40 * this.s, 40 * this.s)
+					cxt.restore();
+				}
+	 
+				Sakura.prototype.update = function() {
+					this.x = this.fn.x(this.x, this.y);
+					this.y = this.fn.y(this.y, this.y);
+					this.r = this.fn.r(this.r);
+					if(this.x > window.innerWidth ||
+						this.x < 0 ||
+						this.y > window.innerHeight ||
+						this.y < 0
+					) {
+						this.r = getRandom('fnr');
+						if(Math.random() > 0.4) {
+							this.x = getRandom('x');
+							this.y = 0;
+							this.s = getRandom('s');
+							this.r = getRandom('r');
+						} else {
+							this.x = window.innerWidth;
+							this.y = getRandom('y');
+							this.s = getRandom('s');
+							this.r = getRandom('r');
+						}
+					}
+				}
+	 
+				SakuraList = function() {
+					this.list = [];
+				}
+				SakuraList.prototype.push = function(sakura) {
+					this.list.push(sakura);
+				}
+				SakuraList.prototype.update = function() {
+					for(var i = 0, len = this.list.length; i < len; i++) {
+						this.list[i].update();
+					}
+				}
+				SakuraList.prototype.draw = function(cxt) {
+					for(var i = 0, len = this.list.length; i < len; i++) {
+						this.list[i].draw(cxt);
+					}
+				}
+				SakuraList.prototype.get = function(i) {
+					return this.list[i];
+				}
+				SakuraList.prototype.size = function() {
+					return this.list.length;
+				}
+	 
+				function getRandom(option) {
+					var ret, random;
+					switch(option) {
+						case 'x':
+							ret = Math.random() * window.innerWidth;
+							break;
+						case 'y':
+							ret = Math.random() * window.innerHeight;
+							break;
+						case 's':
+							ret = Math.random();
+							break;
+						case 'r':
+							ret = Math.random() * 1;
+							break;
+						case 'fnx':
+							random = -0.3 + Math.random() * 1;
+							ret = function(x, y) {
+								return x + 0.5 * random - 1.7;
+							};
+							break;
+						case 'fny':
+							random = 1.0 + Math.random() * 0.5
+							ret = function(x, y) {
+								return y + random;
+							};
+							break;
+						case 'fnr':
+							random = Math.random() * 0.03;
+							ret = function(r) {
+								return r + random;
+							};
+							break;
+					}
+					return ret;
+				}
+	 
+				function startSakura() {
+	 
+					requestAnimationFrame = window.requestAnimationFrame ||
+						window.mozRequestAnimationFrame ||
+						window.webkitRequestAnimationFrame ||
+						window.msRequestAnimationFrame ||
+						window.oRequestAnimationFrame;
+					var canvas = document.createElement('canvas'),
+						cxt;
+					staticx = true;
+					canvas.height = window.innerHeight;
+					canvas.width = window.innerWidth;
+					canvas.setAttribute('style', 'position: fixed;left: 0;top: 0;pointer-events: none;');
+					canvas.setAttribute('id', 'canvas_sakura');
+					document.getElementsByTagName('body')[0].appendChild(canvas);
+					cxt = canvas.getContext('2d');
+					var sakuraList = new SakuraList();
+					for(var i = 0; i < 50; i++) {
+						var sakura, randomX, randomY, randomS, randomR, randomFnx, randomFny;
+						randomX = getRandom('x');
+						randomY = getRandom('y');
+						randomR = getRandom('r');
+						randomS = getRandom('s');
+						randomFnx = getRandom('fnx');
+						randomFny = getRandom('fny');
+						randomFnR = getRandom('fnr');
+						sakura = new Sakura(randomX, randomY, randomS, randomR, {
+							x: randomFnx,
+							y: randomFny,
+							r: randomFnR
+						});
+						sakura.draw(cxt);
+						sakuraList.push(sakura);
+					}
+					stop = requestAnimationFrame(function() {
+						cxt.clearRect(0, 0, canvas.width, canvas.height);
+						sakuraList.update();
+						sakuraList.draw(cxt);
+						stop = requestAnimationFrame(arguments.callee);
+					})
+				}
+	 
+				window.onresize = function() {
+					var canvasSnow = document.getElementById('canvas_snow');
+					canvasSnow.width = window.innerWidth;
+					canvasSnow.height = window.innerHeight;
+				}
+	 
+				img.onload = function() {
+					startSakura();
+				}
+	 
+				function stopp() {
+					if(staticx) {
+						var child = document.getElementById("canvas_sakura");
+						child.parentNode.removeChild(child);
+						window.cancelAnimationFrame(stop);
+						staticx = false;
+					} else {
+						startSakura();
+					}
+				}
+	</script>
+
+    <div class="container">
+        <h1>2023韶关中考查分网站</h1>
+        
+<br>
+<br>
+
+        <form onsubmit="checkScore(); return false;">
+            <input type="text" id="exam-number" placeholder="请输入您的十位数考号" style="width:321px;">
+
+            <button type="submit" id="submit-button" onclick="scrollToTop()">查询</button>
+
+<script>
+
+
+
+function scrollToTop() {
+  var submitButton = document.getElementById('submit-button');
+  submitButton.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  submitButton.style.scrollMarginTop = '16px'; // 设置上方的空隙，可以根据需要调整数值
+}
+</script>
+            
+            
+            
+        </form>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <table id="score-table">
+            <tr>
+                <th>姓名</th>
+                <th>考号</th>
+                <th>学校</th>
+                <th>分数</th>
+            </tr>
+            <tr>
+            
+            <td id="name-display"></td>
+            
+                <td id="exam-number-display"></td>
+                <td id="school-display"></td>
+                <td id="score-display"></td>
+            </tr>
+        </table>
+    </div>
+    
+    <script>
+        function checkScore() {
+            var examNumber = document.getElementById("exam-number").value;
+            var score;
+            
+            // 在这里设置假的分数
+switch (examNumber) {
+    case "2020101001":
+name = "lzh";
+score = 600;
+school = "韶关一中";
+break;
+case "2020101002":
+name = "lyj";
+score = 601;
+school = "韶关一中";
+break;
+case "2020101003":
+name = "llr";
+score = 650;
+school = "韶关一中";
+break;
+case "2020101004":
+name = "chl";
+score = 603;
+school = "韶关一中";
+break;
+case "2020101005":
+name = "zyh";
+score = 666;
+school = "韶关一中";
+break;
+case "2020101006":
+name = "phx";
+score = 618;
+school = "韶关一中";
+break;
+case "2020101007":
+name = "xkn";
+score = 606;
+school = "韶关一中";
+break;
+case "2020101008":
+name = "lyr";
+score = 607;
+school = "韶关一中";
+break;
+case "2020101009":
+name = "lyx";
+score = 608;
+school = "韶关一中";
+break;
+case "2020101010":
+name = "xsx";
+score = 1145;
+school = "韶关一中";
+break;
+case "2020101011":
+name = "lzy";
+score = 610;
+school = "韶关一中";
+break;
+case "2020101012":
+name = "zlh";
+score = 611;
+school = "韶关一中";
+break;
+case "2020101013":
+name = "zjw";
+score = 612;
+school = "韶关一中";
+break;
+case "2020101014":
+name = "wxy";
+score = 613;
+school = "韶关一中";
+break;
+case "2020101015":
+name = "zxc";
+score = 614;
+school = "韶关一中";
+break;
+case "2020101016":
+name = "fl";
+score = 615;
+school = "韶关一中";
+break;
+case "2020101017":
+name = "lsb";
+score = 616;
+school = "韶关一中";
+break;
+case "2020101018":
+name = "lsk";
+score = 617;
+school = "韶关一中";
+break;
+case "2020101019":
+name = "llq";
+score = 618;
+school = "韶关一中";
+break;
+case "2020101020":
+name = "jjj";
+score = 619;
+school = "韶关一中";
+break;
+case "2020101021":
+name = "lfl";
+score = 620;
+school = "韶关一中";
+break;
+case "2020101022":
+name = "hyy";
+score = 621;
+school = "韶关一中";
+break;
+case "2020101023":
+name = "lmy";
+score = 622;
+school = "韶关一中";
+break;
+case "2020101044":
+name = "yyy";
+score = 623;
+school = "韶关一中";
+break;
+    case "2020101045":
+        name = "lzn";
+        score = 624;
+        school = "韶关一中";
+        break;
+    case "2020101046":
+        name = "hy";
+        score = 625;
+        school = "韶关一中";
+        break;
+    case "2020101027":
+        name = "cyf";
+        score = 626;
+        school = "韶关一中";
+        break;
+    case "2020101028":
+        name = "lsw";
+        score = 627;
+        school = "韶关一中";
+        break;
+    case "2020101029":
+        name = "ljj";
+        score = 628;
+        school = "韶关一中";
+        break;
+    case "2020101030":
+        name = "hsy";
+        score = 629;
+        school = "韶关一中";
+        break;
+    case "2020101031":
+        name = "yrx";
+        score = 630;
+        school = "韶关一中";
+        break;
+    case "2020101032":
+        name = "dt";
+        score = 631;
+        school = "韶关一中";
+        break;
+    case "2020101033":
+        name = "hxl";
+        score = 632;
+        school = "韶关一中";
+        break;
+    case "2020101034":
+        name = "xbh";
+        score = 633;
+        school = "韶关一中";
+        break;
+    case "2020101035":
+        name = "lls";
+        score = 634;
+        school = "韶关一中";
+        break;
+    case "2020101036":
+        name = "cc";
+        score = 635;
+        school = "韶关一中";
+        break;
+    case "2020101037":
+        name = "hxy";
+        score = 636;
+        school = "韶关一中";
+        break;
+    case "2020101038":
+        name = "wxt";
+        score = 637;
+        school = "韶关一中";
+        break;
+    case "2020101039":
+        name = "lss";
+        score = 638;
+        school = "韶关一中";
+        break;
+    case "2020101040":
+        name = "hl";
+        score = 639;
+        school = "韶关一中";
+        break;
+    case "2020101041":
+        name = "cy";
+        score = "cy666";
+        school = "韶关一中";
+        break;
+    case "2020101042":
+        name = "ph";
+        score = 641;
+        school = "韶关一中";
+        break;
+    case "2020101043":
+        name = "ly";
+        score = 642;
+        school = "韶关一中";
+        break;
+    case "2020101047":
+        name = "zy";
+        score = 642;
+        school = "韶关一中";
+        break;
+    case "2020101048":
+        name = "jzn";
+        score = 642;
+        school = "韶关一中";
+        break;
+
+    case "cy":
+        name = "cy"
+        score = "cy国不需要分数";
+        school = "cy国";
+        break;
+        
+                default:
+                    name = "暂无"
+                    score = "暂无";
+                    school = "暂无";
+                    break;
+            }
+            
+            document.getElementById("exam-number-display").innerText = examNumber;
+            
+            document.getElementById("name-display").innerText = name;
+            
+            document.getElementById("school-display").innerText = school; // 设置学校名称
+    
+            
+            document.getElementById("score-display").innerText = score;
+            document.getElementById("score-table").style.display = "table";
+            
+            
+            
+            
+            
+             
+}
+
+
+
+
+        
+    </script>
+    
+
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+<script type="text/javascript">
+document.write(returnCitySN["cip"]+','+returnCitySN["cname"])
+</script>
+</body>
+</html>
