@@ -1,0 +1,22 @@
+/*单点登录SDK*/
+var Login = function () {}
+
+var self = this;
+var queryInfoPolling = 0;
+var queryInfoInterval;
+var queryInfoShade;
+
+//登录操作后回调函数
+function queryLoginInfo() {
+    queryInfoPolling = 0;
+}
+
+Login.login = function (successCallback, failCallback, vm) {
+    console.log(vm);
+    Richinfo.Acquire.init({
+        successCallback: queryLoginInfo
+    }, successCallback, failCallback, vm);
+}
+Login.YdLogin = function (successCallback, failCallback, vm) {
+    Richinfo.YDRZ.init({}, successCallback, failCallback, vm);
+}
