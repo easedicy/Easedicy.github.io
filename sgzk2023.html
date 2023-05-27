@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)https://gd.10086.cn/apph5/shzk/index.html#/ -->
+<html lang="en" style="font-size: 100px;">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style>
+    body {transition: opacity ease-in 0.2s;}
+    body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relative;}
+  </style>
+  <link rel="icon" href="https://gd.10086.cn/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+  <script src="./韶关市中考成绩查询_files/jquery-3.1.1.min.js.下载"></script>
+  <script src="./韶关市中考成绩查询_files/acquire_min.js.下载"></script>
+  <script src="./韶关市中考成绩查询_files/easylogin_min.js.下载"></script>
+  <title _msttexthash="37042720" _msthash="0">韶关市中考成绩查询</title>
+  <script>
+    var screenWitdh, timeout;
+    function changefontsize() {
+      var html = document.getElementsByTagName('html')[0];
+      screenWitdh = html.offsetWidth >= 750 ? 750 : html.offsetWidth;
+      html.style.fontSize = screenWitdh * 100 / 750 + "px";
+      if (typeof WeixinJSBridge == "object" && typeof WeixinJSBridge.invoke == "function") {
+        handleFontSize();
+      } else {
+        if (document.addEventListener) {
+          document.addEventListener("WeixinJSBridgeReady", handleFontSize, false);
+        } else if (document.attachEvent) {
+          document.attachEvent("WeixinJSBridgeReady", handleFontSize);
+          document.attachEvent("onWeixinJSBridgeReady", handleFontSize);
+        }
+      }
+      function handleFontSize() {
+        WeixinJSBridge.invoke('setFontSizeCallback', {
+          'fontSize': 0
+        });
+        WeixinJSBridge.on('menu:setfont', function() {
+          WeixinJSBridge.invoke('setFontSizeCallback', {
+            'fontSize': 0
+          });
+        });
+      }
+    }
+    window.onresize = () => {
+      if (timeout != null) clearTimeout(timeout)
+      timeout = setTimeout(() => {
+        changefontsize()
+      }, 500)
+    }
+    changefontsize();
+  </script>
+  <script type="module" crossorigin="" src="./韶关市中考成绩查询_files/index.a49a6786.js.下载"></script>
+  <link rel="stylesheet" href="./韶关市中考成绩查询_files/index.215b0640.css">
+  <link rel="modulepreload" as="script" crossorigin="" href="https://gd.10086.cn/apph5/shzk/assets/index.a92e719a.js">
+  <link rel="stylesheet" href="./韶关市中考成绩查询_files/index.30132fc5.css">
+  <link rel="modulepreload" as="script" crossorigin="" href="https://gd.10086.cn/apph5/shzk/assets/index.1918e00a.js">
+</head>
+<body>
+  <div id="app" data-v-app="">
+    <div class="container">
+      <div class="title"><img src="./韶关市中考成绩查询_files/title.d63601e5.png"></div>
+      <div class="article">
+        <div class="articleContainer">
+          <div class="idValue" _msttexthash="26142610" _msthash="1">请输入准考证号</div>
+          <input type="text" class="number">
+          <div class="idValue" _msttexthash="42748953" _msthash="2">请输入出生日期(例：20230710)</div>
+          <input type="text" class="number">
+        </div>
+      </div>
+      <div class="btnContainer">
+        <div class="query-btn" _msttexthash="6144567" _msthash="3">查询</div>
+        <div class="query-btn" _msttexthash="6789263" _msthash="4">重置</div>
+      </div>
+    </div>
+    <div class="container" _msthidden="24" style="display: none;">
+      <div class="resultContainer" _msthidden="11">
+        <div class="resultTitle" _msttexthash="50407968" _msthidden="1" _msthash="5">2022韶关市中考成绩查询</div>
+        <div class="resultBox" _msthidden="8">
+          <p class="text" _msttexthash="21632195" _msthidden="1" _msthash="6">准考证号：</p>
+          <p class="text" _msttexthash="20926776" _msthidden="1" _msthash="7">考生姓名：</p>
+          <p class="text" _msttexthash="20850531" _msthidden="1" _msthash="8">出生日期：</p>
+          <p class="text" _msttexthash="35937057" _msthidden="1" _msthash="9">您的中考成绩为：</p>
+          <ul class="results-list" _msthidden="4">
+            <li _msthidden="2">
+              <p class="results-left" _msttexthash="5120128" _msthidden="1" _msthash="10">地理</p>
+              <p class="results-rigth" _msttexthash="1910818" _msthidden="1" _msthash="11">分</p>
+            </li>
+            <li _msthidden="2">
+              <p class="results-left" _msttexthash="5774509" _msthidden="1" _msthash="12">生物</p>
+              <p class="results-rigth" _msttexthash="1910818" _msthidden="1" _msthash="13">分</p>
+            </li>
+          </ul>
+        </div>
+        <div class="noteText" _msttexthash="69846855" _msthidden="1" _msthash="14">您可截屏保存成绩分享至亲友！</div>
+        <div class="noteText" _msttexthash="56127769" _msthidden="1" _msthash="15">招生录取时间：2023年6月27日上午9:00至12:00</div>
+      </div>
+    </div>
+    <div class="container" _msthidden="24" style="display: none;">
+      <div class="errorContainer" _msthidden="11">
+        <div class="errorTitle" _msttexthash="39619227" _msthidden="1" _msthash="16">抱歉，查询失败！</div>
+        <div class="errorText" _msttexthash="39729938" _msthidden="1" _msthash="17">请检查您输入的准考证号和出生日期是否正确。</div>
+      </div>
+    </div>
+    <div class="loadingContainer" _msthidden="6" style="display: none;">
+      <div class="loading" _msthidden="1">
+        <div class="spinner">
+          <div class="bounce1"></div>
+          <div class="bounce2"></div>
+          <div class="bounce3"></div>
+        </div>
+        <div class="loadingText" _msttexthash="27253662" _msthidden="1" _msthash="18">正在查询中...</div>
+      </div>
+    </div>
+  </div>
+  <script src="./韶关市中考成绩查询_files/index.5e9f3aaf.js.下载"></script>
+</body>
+</html>
