@@ -1,0 +1,67 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+  <style>  
+    body {  
+      background-color: #f8f9fa;  
+      display: flex;  
+      justify-content: center;  
+      align-items: center;  
+      height: 100vh;  
+      margin: 0;  
+      font-family: Arial, sans-serif;  
+    }  
+    form {  
+      background-color: #fff;  
+      border-radius: 5px;  
+      padding: 30px;  
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  
+      text-align: center;  
+    }  
+    h1 {  
+      color: #4c5963;  
+      margin-bottom: 20px;  
+    }  
+    label {  
+      display: block;  
+      margin-bottom: 10px;  
+    }  
+    input[type="password"] {  
+      width: 100%;  
+      padding: 10px;  
+      border: 1px solid #ccc;  
+      border-radius: 4px;  
+    }  
+    input[type="submit"] {  
+      background-color: #4c5963;  
+      color: #fff;  
+      padding: 10px 20px;  
+      border: none;  
+      border-radius: 4px;  
+      cursor: pointer;  
+    }  
+    input[type="submit"]:hover {  
+      background-color: #45525e;  
+    }  
+  </style>  
+  <title>密码跳转页面</title>  
+</head>  
+<body>  
+  <form action="http://easedicy.github.io/new_home.html" method="get">  
+    <h1>请输入密码才能跳转</h1>  
+    <label for="password">密码：</label>  
+    <input type="password" id="password" name="password" required>  
+    <br><br>  
+    <input type="submit" value="跳转">  
+  </form>  
+  <script>  
+    document.querySelector('form').addEventListener('submit', function(event) {  
+      var password = document.getElementById('password').value;  
+      if (password !== '80094025') {  
+        event.preventDefault();  
+        alert('密码错误！');  
+      }  
+    });  
+  </script>  
+</body>  
+</html>
