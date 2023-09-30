@@ -9,7 +9,7 @@ var timer = setInterval(function(){
         clearInterval(timer);
         document.title = "正在跳转..."
         // 跳转到https://senge.dev
-        window.location.href = "https://easedicy.github.io/new_home.html";
+        window.location.href = "https://easedicy.github.io/mima.html";
     }
     // 将时间显示在页面上
     document.querySelector(".time_h1").innerHTML = time;
