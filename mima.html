@@ -1,21 +1,26 @@
 <!DOCTYPE html>  
-<html>  
+<html lang="zh_CN"> <!-- 设置中文语言 -->
 <head>  
   <style>  
     body {  
-      background-color: #f8f9fa;  
+      background: linear-gradient(45deg, #4c5963, #899cb8); /* 背景渐变色 */
       display: flex;  
       justify-content: center;  
       align-items: center;  
       height: 100vh;  
       margin: 0;  
-      font-family: Arial, sans-serif;  
+      font-family: 'Microsoft YaHei', sans-serif; /* 使用微软雅黑字体，确保中文显示正常 */
+      opacity: 0; /* 初始透明度为0，用于淡入效果 */
+      animation: fadeIn 1s ease-in-out forwards; /* 淡入动画 */
     }  
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
     form {  
       background-color: #fff;  
-      border-radius: 5px;  
+      border-radius: 10px;  
       padding: 30px;  
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* 更突出的阴影效果 */
       text-align: center;  
     }  
     h1 {  
@@ -30,38 +35,69 @@
       width: 100%;  
       padding: 10px;  
       border: 1px solid #ccc;  
-      border-radius: 4px;  
+      border-radius: 6px;  
     }  
     input[type="submit"] {  
       background-color: #4c5963;  
       color: #fff;  
-      padding: 10px 20px;  
+      padding: 12px 24px;  
       border: none;  
-      border-radius: 4px;  
+      border-radius: 6px;  
       cursor: pointer;  
     }  
     input[type="submit"]:hover {  
       background-color: #45525e;  
     }  
+    .loading-spinner {
+      display: none;
+      border: 4px solid rgba(255, 255, 255, 0.3); /* 更清晰的加载图标 */
+      border-radius: 50%;
+      border-top: 4px solid #fff;
+      width: 20px;
+      height: 20px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto;
+      margin-top: 15px;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
   </style>  
   <title>密码跳转页面</title>  
 </head>  
 <body>  
-  <form action="http://easedicy.github.io/new_home.html" method="get">  
+  <form id="passwordForm" action="http://easedicy.github.io/new_home.html" method="get">  
     <h1>输入密码后才能跳转</h1>  
     <label for="password">密码：</label>  
     <input type="password" id="password" name="password" required>  
+    <div class="loading-spinner" id="loadingSpinner"></div>
     <br><br>  
-    <input type="submit" value="跳转">  
+    <input type="submit" value="跳转" id="submitButton">  
   </form>  
   <script>  
-    document.querySelector('form').addEventListener('submit', function(event) {  
-      var password = document.getElementById('password').value;  
-      if (password !== '80094025') {  
-        event.preventDefault();  
-        alert('密码错误！');  
-      }  
-    });  
+    document.addEventListener('DOMContentLoaded', function () {
+      var form = document.getElementById('passwordForm');
+      var passwordInput = document.getElementById('password');
+      var loadingSpinner = document.getElementById('loadingSpinner');
+      var submitButton = document.getElementById('submitButton');
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        submitButton.style.display = 'none';
+        loadingSpinner.style.display = 'inline-block';
+        setTimeout(function () {
+          var password = passwordInput.value;
+          if (password !== '80094025') {
+            alert('密码错误！');
+          } else {
+            form.submit();
+          }
+          submitButton.style.display = 'inline-block';
+          loadingSpinner.style.display = 'none';
+        }, 1500);
+      });
+    });
   </script>  
 </body>  
 </html>
