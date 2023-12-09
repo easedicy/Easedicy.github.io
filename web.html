@@ -1,6 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<!-- saved from url=(0034)http://10.137.0.226/smp/commonauth -->
-<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<!-- saved from url=(0204)http://192.168.1.1/smp/commonauth.html?wlanuserip=10.137.127.116&wlanacname=NAS&ssid=Ruijie&nasip=10.20.0.253&mac=000000000000&t=wireless-v2-plain&url=http://edge-http.microsoft.com/captiveportal/generate_204 -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=GBK"><style>body {transition: opacity ease-in 0.2s; } 
+body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relative; } 
+</style>
 		<meta http-equiv="X-UA-Compatible" content="IE=9;IE=8;IE=5;">
 		<title>web认证</title>
 		<style type="text/css">
@@ -35,22 +37,22 @@
 	</head>
 	<body onload="init()">
 		<img src="./web认证_files/pc_bg.jpg" width="100%" height="100%" style="z-index:-1000;position:absolute;left:0;top:0">
-		<form id="loginForm" name="loginForm" method="post" action="http://10.137.0.226/smp/commonauth" onsubmit="return false">
+		<form id="loginForm" name="loginForm" method="post" action="http://192.168.1.1/smp/commonauth.html" onsubmit="return false">
 			<input id="kind" name="kind" type="hidden" value="preLogin">
 			<input id="isEnableNickNameAuth" name="isEnableNickNameAuth" type="hidden" value="">
 			<input id="mac" name="mac" type="hidden" value="">
 			<input id="port" name="port" type="hidden" value="">
-			<input id="urlBeforeLogon" name="urlBeforeLogon" type="hidden" value="">
+			<input id="urlBeforeLogon" name="urlBeforeLogon" type="hidden" value="http://edge-http.microsoft.com/captiveportal/generate_204">
 			<input id="vid" name="vid" type="hidden" value="">
-			<input id="ssid" name="ssid" type="hidden" value="">
+			<input id="ssid" name="ssid" type="hidden" value="Ruijie">
 			<input id="apmac" name="apmac" type="hidden" value="">
-			<input id="userIp" name="userIp" type="hidden" value="10.137.127.102">
+			<input id="userIp" name="userIp" type="hidden" value="10.137.127.116">
 			<input id="t" name="t" type="hidden" value="wireless-v2">
 			<input id="enableEsaAuthen" name="enableEsaAuthen" type="hidden" value="">
-			<input id="nasIp" name="nasIp" type="hidden" value="">
+			<input id="nasIp" name="nasIp" type="hidden" value="10.20.0.253">
 			<input id="enableNormalUserLogin" name="enableNormalUserLogin" type="hidden" value="true">
 			<input id="normalUserNotifyMd5Cookie" name="normalUserNotifyMd5Cookie" type="hidden" value="">
-			<input id="findPswUrl" name="findPswUrl" type="hidden" value="./passwordprotectionservlet?kind=toFindPasswordPage&amp;userIp=10.137.127.102">
+			<input id="findPswUrl" name="findPswUrl" type="hidden" value="./passwordprotectionservlet?kind=toFindPasswordPage&amp;userIp=10.137.127.116">
 			<input id="lastUserId" name="lastUserId" type="hidden" value="">
 			<input id="readPasswordFromCookie" name="readPasswordFromCookie" type="hidden" value="">
 			<input id="passwordInCookie" name="passwordInCookie" type="hidden" value="">
@@ -60,15 +62,15 @@
 			<input id="sccpEncrytIV" name="sccpEncrytIV" type="hidden" value="ded7f05c25ef63be">
 			<input id="sccpClientPort" name="sccpClientPort" type="hidden" value="138">
 			<input id="sccpServerIp" name="sccpServerIp" type="hidden" value="10.137.0.226">
-			<input id="sccpTimestamp" name="sccpTimestamp" type="hidden" value="1670445151">
+			<input id="sccpTimestamp" name="sccpTimestamp" type="hidden" value="1683773414">
 			<input id="commonUsernameInputTip" name="commonUsernameInputTip" type="hidden" value="用户名">
 			<input id="commonPwdInputTip" name="commonPwdInputTip" type="hidden" value="密码">
 			<input id="commonDisclaimerEnable" name="commonDisclaimerEnable" type="hidden" value="false">
 			<input id="disclaimerTitle" name="disclaimerTitle" type="hidden" value="">
 			<input id="disclaimerContent" name="disclaimerContent" type="hidden" value="">
 			<input id="disclaimerLoginBtn" name="disclaimerLoginBtn" type="hidden" value="">
-			<input id="loginActionName" name="loginActionName" type="hidden" value="./commonauth">
-			<input id="loginUrl" name="loginUrl" type="hidden" value="commonauth">
+			<input id="loginActionName" name="loginActionName" type="hidden" value="./commonauth.html">
+			<input id="loginUrl" name="loginUrl" type="hidden" value="commonauth.html">
 			<input id="isSubmit" name="isSubmit" type="hidden" value="">
 			<input id="exponent" name="exponent" type="hidden" value="10001">
 			<input id="module" name="module" type="hidden" value="c81272b2215b018b194ce9709608367ccf38a459f8f1ae98742d34df107f6d12096d42225a2361968f5616b41ff177cb0ff5faeb5b77aad72ed6191b22f7874682d0343fa8278c091092fbd875d112811d3a66bcaea4b4515ff23fd8f62ea6725f40a99d513df428dcef574abd34ed7e4ca82084b3963ee951d2956eab9d38c7">
@@ -118,7 +120,7 @@
 						</div>
 						
 							<div class="remember_pwd forget_pwd" align="right">
-								<a href="http://10.137.0.226/smp/commonauth#" onclick="return toFindPswPage()">忘记密码</a>
+								<a href="http://192.168.1.1" onclick="return toFindPswPage()">忘记密码</a>
 							</div>
 						
 					</div>
@@ -141,7 +143,7 @@
 				
 			</div>
 		</form>
-		<script language="JavaScript" src="./web认证_files/common_user_auth_login.js">
+		<script language="JavaScript" src="./web认证_files/common_user_auth_login.js.下载">
 		</script>
 		<script language="JavaScript">
 		function forbidBackSpace() {
@@ -301,4 +303,6 @@
 			}
 		</script>
 	
+<template id="auto-clicker-autofill-popup"></template>
+<template id="auto-clicker-autofill-popup-tr"></template>
 </body></html>
