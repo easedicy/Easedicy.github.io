@@ -55,6 +55,12 @@
             border-radius: 15px; /* 图片圆润化 */
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* 修改图片阴影颜色为深灰色 */
         }
+
+        @media (max-width: 767px) {
+            .gallery {
+                grid-template-columns: 1fr; /* 在小屏幕上将图片列数设置为 1 */
+            }
+        }
     </style>
 </head>
 <body>
