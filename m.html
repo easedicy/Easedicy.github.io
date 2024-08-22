@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>请验证</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            transition: background-color 0.5s, color 0.5s;
+        }
+        .captcha-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+        .captcha-input {
+            margin-top: 20px;
+            padding: 12px;
+            width: 100%;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        .captcha-input:focus {
+            border-color: #007BFF;
+            outline: none;
+        }
+        .captcha-button {
+            margin-top: 20px;
+            padding: 12px 24px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        .captcha-button:hover {
+            background-color: #0056b3;
+        }
+        .captcha-button.disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .hidden {
+            display: none;
+        }
+        .captcha {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            white-space: nowrap; /* 强制验证码排成一行 */
+        }
+        .captcha-item {
+            margin: 5px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .captcha-text {
+            font-size: 24px;
+            font-weight: bold;
+            user-select: none;
+        }
+        .captcha-shape {
+            width: 30px; /* 固定宽度 */
+            height: 30px; /* 固定高度 */
+            transform-origin: center;
+            transform: rotate(0deg);
+        }
+        .captcha-circle {
+            border-radius: 50%;
+        }
+        .captcha-square {
+            border-radius: 5px;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.5s, transform 0.5s;
+        }
+        .iframe-visible {
+            opacity: 1;
+            transform: translateY(-100%);
+        }
+        .night-mode {
+            background-color: #333;
+            color: #fff;
+        }
+        .night-mode .captcha-container {
+            background-color: #444;
+            color: #fff;
+        }
+        .night-mode .captcha-input {
+            background-color: #555;
+            color: #fff;
+            border-color: #666;
+        }
+        .night-mode .captcha-button {
+            background-color: #0056b3;
+        }
+        .night-mode .captcha-button.disabled {
+            background-color: #777; /* 暗黑模式下禁用按钮的颜色 */
+        }
+        .success-message {
+            color: green;
+            font-size: 14px; /* 缩小成功提示的字体大小 */
+            margin-top: 10px;
+        }
+        .mode-switch {
+            margin-top: 20px;
+            font-size: 16px;
+        }
+        .mode-switch label {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="captcha-container">
+        <h2 id="captcha-title">题目</h2>
+        <div id="captcha" class="captcha"></div>
+        <input type="text" id="userInput" class="captcha-input" placeholder="输入答案">
+        <button id="captcha-button" onclick="validateCaptcha()" class="captcha-button">验证</button>
+        <div id="timer" class="hidden" style="margin-top: 10px; color: red;"></div>
+        <div id="success-message" class="success-message hidden">(✪▽✪) 验证成功！正在跳转...</div>
+        <div class="mode-switch">
+            <label for="darkModeToggle">暗黑模式</label>
+            <input type="checkbox" id="darkModeToggle" onclick="toggleDarkMode()">
+        </div>
+    </div>
+
+    <div id="targetPage" class="hidden">
+        <iframe src="https://easedicy.github.io/math.html"></iframe>
+    </div>
+
+    <script>
+        let correctAnswer;
+        let errorCount = 0;
+        let timer = null;
+        const captchaQuestions = [
+            { title: "请输入下列数字字母验证码", method: "text" },
+            { title: "请输入圆形的数量", method: "circleCount" },
+            { title: "请输入非圆形的数量", method: "nonCircleCount" }
+        ];
+
+        function initializeCaptcha() {
+            const question = captchaQuestions[Math.floor(Math.random() * captchaQuestions.length)];
+            document.getElementById('captcha-title').innerText = question.title;
+
+            // 同时生成文本和形状验证码
+            const captchaData = generateCaptcha();
+            correctAnswer = question.method === "text" ? captchaData.textAnswer : captchaData[question.method];
+
+            document.getElementById('userInput').placeholder = question.method === "text" 
+                ? "输入验证码" 
+                : "输入数量";
+        }
+
+        function generateCaptcha() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            const captchaElement = document.getElementById('captcha');
+            captchaElement.innerHTML = ''; // 清空之前的验证码
+
+            let textAnswer = '';
+            let circleCount = 0;
+            let nonCircleCount = 0;
+            let hasNumber = false;
+            let hasLetter = false;
+            const totalItems = 9;
+            for (let i = 0; i < totalItems; i++) {
+                if (Math.random() > 0.5) {
+                    // 生成文本
+                    const char = chars.charAt(Math.floor(Math.random() * chars.length));
+                    const color = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
+                    const span = document.createElement('span');
+                    span.style.color = color;
+                    span.className = 'captcha-item captcha-text';
+                    span.innerText = char;
+                    captchaElement.appendChild(span);
+                    textAnswer += char;
+                    nonCircleCount++;
+                    if (/\d/.test(char)) hasNumber = true;
+                    if (/[a-zA-Z]/.test(char)) hasLetter = true;
+                } else {
+                    // 生成形状
+                    const shapeType = Math.random() > 0.5 ? 'circle' : 'square';
+                    const shape = document.createElement('div');
+                    shape.className = `captcha-item captcha-shape captcha-${shapeType}`;
+                    shape.style.backgroundColor = `rgb(${Math.floor(Math.random() * 256)}, 
+                    ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
+                    
+                    shape.style.transform = `rotate(${Math.floor(Math.random() * 360)}deg)`;
+
+                    captchaElement.appendChild(shape);
+                    
+                    if (shapeType === 'circle') {
+                        circleCount++;
+                    } else {
+                        nonCircleCount++;
+                    }
+                }
+            }
+
+            if (!hasNumber || !hasLetter) {
+                return generateCaptcha();
+            }
+
+            return { textAnswer, circleCount, nonCircleCount };
+        }
+
+        function validateCaptcha() {
+            if (timer) {
+                alert('请等待10秒后再试。');
+                return;
+            }
+
+            const userInput = document.getElementById('userInput').value.replace(/\s+/g, '');
+            if (userInput === correctAnswer.toString()) {
+                const captchaContainer = document.querySelector('.captcha-container');
+                const successMessage = document.getElementById('success-message');
+                successMessage.classList.remove('hidden');
+
+                setTimeout(() => {
+                    captchaContainer.style.opacity = 0;
+                    captchaContainer.style.transform = 'translate(-50%, -150%)';
+
+                    setTimeout(() => {
+                        const iframe = document.querySelector('iframe');
+                        iframe.classList.add('iframe-visible');
+                        document.getElementById('targetPage').classList.remove('hidden');
+                    }, 500);
+                }, 2000);
+            } else {
+                errorCount++;
+                if (errorCount >= 6) {
+                    window.location.href = 'https://vdse.bdstatic.com//192d9a98d782d9c74c96f09db9378d93.mp4?authorization=bce-auth-v1/40f207e648424f47b2e3dfbb1014b1a5/2021-07-12T02:14:24Z/-1/host/530146520a1c89fb727fbbdb8a0e0c98ec69955459aed4b1c8e00839187536c9/';
+                } else if (errorCount >= 3) {
+                    startTimer();
+                } else {
+                    alert('验证失败，请重试。');
+                    initializeCaptcha();
+                }
+            }
+        }
+
+        function startTimer() {
+            const captchaButton = document.getElementById('captcha-button');
+            const timerElement = document.getElementById('timer');
+            captchaButton.disabled = true;
+            captchaButton.classList.add('disabled');
+            timerElement.classList.remove('hidden');
+            let timeLeft = 10;
+            timer = setInterval(() => {
+                timeLeft--;
+                timerElement.innerText = `请等待${timeLeft}秒后再试。`;
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    timer = null;
+                    captchaButton.disabled = false;
+                    captchaButton.classList.remove('disabled');
+                    timerElement.classList.add('hidden');
+                    initializeCaptcha();
+                }
+            }, 1000);
+        }
+
+        function getBeijingTime() {
+            return new Promise((resolve) => {
+                fetch('https://worldtimeapi.org/api/timezone/Asia/Shanghai')
+                    .then(response => response.json())
+                    .then(data => {
+                        resolve(new Date(data.datetime));
+                    })
+                    .catch(() => resolve(new Date()));
+            });
+        }
+
+        function enableNightMode(currentTime) {
+            const hour = currentTime.getHours();
+            if (hour >= 19 || hour < 6) {
+                document.body.classList.add('night-mode');
+                document.getElementById('darkModeToggle').checked = true;
+            }
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('night-mode');
+        }
+
+        initializeCaptcha();
+        getBeijingTime().then(enableNightMode);
+    </script>
+</body>
+</html>
