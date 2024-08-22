@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一分钟100以内加减法游戏</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            transition: background-color 0.5s, color 0.5s;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+        }
+        .container {
+            background-color: var(--bg-color);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            color: var(--text-color);
+        }
+        h1 {
+            font-size: 28px;
+            margin-bottom: 30px;
+        }
+        .question {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        .input-group input {
+            padding: 12px;
+            font-size: 18px;
+            width: calc(100% - 24px);
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+            background-color: var(--input-bg-color);
+            color: var(--text-color);
+        }
+        .result {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .button-group button {
+            padding: 12px 24px;
+            font-size: 18px;
+            margin: 0 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            background-color: #007bff;
+            transition: background-color 0.3s;
+        }
+        .button-group button:hover {
+            background-color: #0056b3;
+        }
+        .button-group button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .timer {
+            font-size: 20px;
+            color: #f00;
+            margin-bottom: 20px;
+        }
+        .score-display {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .dark-mode {
+            --bg-color: #333;
+            --text-color: #fff;
+            --input-bg-color: #555;
+        }
+        .light-mode {
+            --bg-color: #fff;
+            --text-color: #333;
+            --input-bg-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body class="light-mode">
+    <div class="container" id="startPage">
+        <h1>100以内加减法游戏</h1>
+        <div class="button-group">
+            <button class="start-btn" onclick="startGame()">开始答题</button>
+        </div>
+    </div>
+
+    <div class="container" id="gamePage" style="display: none;">
+        <h1>答题中</h1>
+        <div class="timer" id="timer">倒计时：60秒</div>
+        <div class="question" id="question"></div>
+        <div class="input-group">
+            <input type="number" id="answer" placeholder="输入答案">
+        </div>
+        <div class="result" id="result"></div>
+        <div class="button-group">
+            <button class="submit-btn" onclick="checkAnswer()" id="submitBtn">提交</button>
+        </div>
+    </div>
+
+    <div class="container" id="endPage" style="display: none;">
+        <h1>答题结束</h1>
+        <div class="score-display" id="scoreDisplay"></div>
+        <div class="button-group">
+            <button class="restart-btn" onclick="restartGame()">再来一次</button>
+        </div>
+    </div>
+
+    <script>
+        let currentQuestion;
+        let correctAnswer;
+        let score = 0;
+        let timeLeft = 61;
+        let timerInterval;
+        let autoNextTimeout;
+
+        function generateQuestion() {
+            const operators = ['+', '-'];
+            const operator = operators[Math.floor(Math.random() * operators.length)];
+            let num1 = Math.floor(Math.random() * 60);
+            let num2 = Math.floor(Math.random() * 50);
+            if (operator === '-') {
+                if (num1 < num2) {
+                    [num1, num2] = [num2, num1];
+                }
+            }
+            currentQuestion = `${num1} ${operator} ${num2}`;
+            correctAnswer = eval(currentQuestion);
+            document.getElementById('question').innerText = currentQuestion;
+        }
+
+        function checkAnswer() {
+            const userAnswer = parseInt(document.getElementById('answer').value);
+            if (userAnswer === correctAnswer) {
+                document.getElementById('result').innerText = '答对了！';
+                document.getElementById('result').style.color = 'green';
+                score += 20;
+                clearTimeout(autoNextTimeout);
+                autoNextTimeout = setTimeout(nextQuestion, 500);
+            } else {
+                document.getElementById('result').innerText = '答错了，再试一次！';
+                document.getElementById('result').style.color = 'red';
+                document.getElementById('answer').value = '';
+            }
+        }
+
+        function nextQuestion() {
+            generateQuestion();
+            document.getElementById('answer').value = '';
+            document.getElementById('result').innerText = '';
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                document.getElementById('timer').innerText = `${timeLeft}秒`;
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    endGame();
+                }
+            }, 1000);
+        }
+
+        function startGame() {
+            document.getElementById('startPage').style.display = 'none';
+            document.getElementById('gamePage').style.display = 'block';
+            generateQuestion();
+            startTimer();
+        }
+
+        function endGame() {
+            document.getElementById('gamePage').style.display = 'none';
+            document.getElementById('endPage').style.display = 'block';
+            document.getElementById('scoreDisplay').innerText = `你的得分: ${score}`;
+        }
+
+        function restartGame() {
+            document.getElementById('endPage').style.display = 'none';
+            document.getElementById('startPage').style.display = 'block';
+            score = 0;
+            timeLeft = 61;
+            document.getElementById('timer').innerText = `${timeLeft}秒`;
+            document.getElementById('answer').value = '';
+        }
+
+        function setDarkMode() {
+            document.body.classList.add('dark-mode');
+            document.body.classList.remove('light-mode');
+        }
+
+        function setLightMode() {
+            document.body.classList.add('light-mode');
+            document.body.classList.remove('dark-mode');
+        }
+
+        function checkTime() {
+            const now = new Date();
+            const hours = now.getHours();
+            if (hours >= 19 || hours < 6) {
+                setDarkMode();
+            } else {
+                setLightMode();
+            }
+        }
+
+        checkTime();
+    </script>
+</body>
+</html>
