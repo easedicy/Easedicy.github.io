@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -68,7 +68,7 @@
         
         .header p {
             font-size: 1.2rem;
-            opacity: 0.9;
+            opacity: 0.8;
             max-width: 600px;
             margin: 0 auto;
             position: relative;
@@ -99,6 +99,9 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             border: 1px solid #e9ecef;
             transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         
         .selection-box h2 {
@@ -156,6 +159,12 @@
         .btn-warning {
             background: linear-gradient(90deg, #f39c12, #e67e22);
             color: white;
+            opacity: 0.9;
+            transition: opacity 0.3s ease;
+        }
+        
+        .btn-warning:hover {
+            opacity: 1;
         }
         
         .btn-info {
@@ -164,7 +173,7 @@
         }
         
         select {
-            width: 100%;
+            width: 90%;
             padding: 15px;
             border-radius: 12px;
             border: 2px solid #e0e0e0;
@@ -172,6 +181,8 @@
             background: white;
             transition: all 0.3s;
             font-family: 'Noto Serif SC', serif;
+            display: block;
+            margin: 0 auto 20px;
         }
         
         select:focus {
@@ -228,9 +239,9 @@
         
         .question-part {
             display: flex;
-flex-direction: column;   /* 改为垂直排列 */
-align-items: center;      /* 居中 */
-margin: 15px 0;
+            flex-direction: column;
+            align-items: center;
+            margin: 15px 0;
         }
         
         .blank-container {
@@ -347,6 +358,7 @@ margin: 15px 0;
             font-size: 1.2rem;
             color: #6c5ce7;
             font-weight: bold;
+            white-space: nowrap;
         }
         
         .navigation-controls {
@@ -420,6 +432,120 @@ margin: 15px 0;
             font-style: italic;
         }
         
+        /* 自定义文章模态框样式 */
+        #custom-text-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            width: 90%;
+            max-width: 700px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            position: relative;
+            animation: modalFadeIn 0.5s ease;
+        }
+        
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .modal-header h2 {
+            color: #6c5ce7;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .close-modal {
+            background: transparent;
+            border: none;
+            font-size: 1.8rem;
+            color: #7f8c8d;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            color: #e74c3c;
+            transform: rotate(90deg);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #6c5ce7;
+            font-size: 1.1rem;
+        }
+        
+        .form-group input, 
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border-radius: 12px;
+            border: 2px solid #e0e0e0;
+            font-size: 1.1rem;
+            font-family: 'Noto Serif SC', serif;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group textarea {
+            min-height: 200px;
+            resize: vertical;
+        }
+        
+        .form-group input:focus, 
+        .form-group textarea:focus {
+            border-color: #6c5ce7;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
+        }
+        
+        .modal-controls {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .custom-text-notice {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        .custom-text-notice i {
+            color: #e67e22;
+            margin-right: 5px;
+        }
+        
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 2.2rem;
@@ -444,6 +570,7 @@ margin: 15px 0;
             
             .text-selection-container {
                 flex-direction: column;
+                gap: 8px;
             }
             
             .blank-line {
@@ -453,6 +580,18 @@ margin: 15px 0;
             .question-type-tag {
                 font-size: 0.8rem;
                 padding: 3px 8px;
+            }
+            
+            select {
+                width: 95%;
+            }
+            
+            .modal-content {
+                padding: 20px;
+            }
+            
+            .modal-header h2 {
+                font-size: 1.5rem;
             }
         }
     </style>
@@ -479,6 +618,9 @@ margin: 15px 0;
                 <div class="game-controls">
                     <button id="start-btn" class="btn btn-primary">
                         <i class="fas fa-play"></i> 开始挑战
+                    </button>
+                    <button id="custom-text-btn" class="btn btn-outline">
+                        <i class="fas fa-plus-circle"></i> 添加自定义文章
                     </button>
                     <button id="instructions-btn" class="btn btn-outline">
                         <i class="fas fa-info-circle"></i> 游戏说明
@@ -548,6 +690,35 @@ margin: 15px 0;
         <div class="chinese-pattern pattern-2">诗</div>
     </div>
 
+    <!-- 自定义文章模态框 -->
+    <div id="custom-text-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-book-medical"></i> 添加自定义文章</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            
+            <div class="form-group">
+                <label for="custom-title">文章标题：</label>
+                <input type="text" id="custom-title" placeholder="例如：《我的文章》 - 作者">
+            </div>
+            
+            <div class="form-group">
+                <label for="custom-content">文章内容：</label>
+                <textarea id="custom-content" placeholder="请输入完整的文章内容，系统会自动分段处理..."></textarea>
+            </div>
+            
+            <div class="custom-text-notice">
+                <i class="fas fa-lightbulb"></i> 提示：请输入带有标点符号的文章，系统会自动处理为挑战题目
+            </div>
+            
+            <div class="modal-controls">
+                <button id="cancel-custom-text" class="btn btn-outline">取消</button>
+                <button id="submit-custom-text" class="btn btn-primary">添加并开始挑战</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // 课文数据库（以完整篇章存储）
         const texts = {
@@ -582,7 +753,7 @@ margin: 15px 0;
             shuofu: {
                 title: "《阿房宫赋》 - 杜牧",
                 content: [
-                    "六王毕，四海一，蜀山兀，阿房出。覆压三百余里，隔离天日。骊山北构而西折，直走咸阳。二川溶溶，流入宫墙。五步一楼，十步一阁；廊腰缦回，檐牙高啄；各抱地势，钩心斗角。盘盘焉，囷囷焉，蜂房水涡，矗不知其几���万落。",
+                    "六王毕，四海一，蜀山兀，阿房出。覆压三百余里，隔离天日。骊山北构而西折，直走咸阳。二川溶溶，流入宫墙。五步一楼，十步一阁；廊腰缦回，檐牙高啄；各抱地势，钩心斗角。盘盘焉，囷囷焉，蜂房水涡，矗不知其几千万落。",
                     "长桥卧波，未云何龙？复道行空，不霁何虹？高低冥迷，不知西东。歌台暖响，春光融融；舞殿冷袖，风雨凄凄。一日之内，一宫之间，而气候不齐。",
                     "妃嫔媵嫱，王子皇孙，辞楼下殿，辇来于秦。朝歌夜弦，为秦宫人。明星荧荧，开妆镜也；绿云扰扰，梳晓鬟也；渭流涨腻，弃脂水也；烟斜雾横，焚椒兰也。雷霆乍惊，宫车过也；辘辘远听，杳不知其所之也。一肌一容，尽态极妍，缦立远视，而望幸焉；有不得见者三十六年。",
                     "燕赵之收藏，韩魏之经营，齐楚之精英，几世几年，剽掠其人，倚叠如山；一旦不能有，输来其间。鼎铛玉石，金块珠砾，弃掷逦迤，秦人视之，亦不甚惜。",
@@ -617,14 +788,21 @@ margin: 15px 0;
         const showAnswerBtn = document.getElementById('show-answer-btn');
         const hideAnswerBtn = document.getElementById('hide-answer-btn');
         const questionTypeElement = document.getElementById('question-type');
+        const customTextBtn = document.getElementById('custom-text-btn');
+        const customTextModal = document.getElementById('custom-text-modal');
+        const closeModalBtn = document.querySelector('.close-modal');
+        const cancelCustomTextBtn = document.getElementById('cancel-custom-text');
+        const submitCustomTextBtn = document.getElementById('submit-custom-text');
+        const customTitleInput = document.getElementById('custom-title');
+        const customContentInput = document.getElementById('custom-content');
 
         // 游戏状态
         let currentText = null;
         let questionCount = 1;
-        let currentQuestion = null;
         let questionHistory = [];
         let currentHistoryIndex = -1;
         let answerVisible = false;
+        let customTextCounter = 1;
 
         // 开始游戏
         startBtn.addEventListener('click', () => {
@@ -677,9 +855,9 @@ margin: 15px 0;
             hideAnswer();
         }
 
-        // 改进的分句函数 - 移除了顿号作为分隔符
+        // 改进的分句函数
         function splitSentence(sentence) {
-            // 使用新的正则表达式：顿号不作为分隔符
+            // 使用正则表达式分割句子
             const regex = /([^，。！？；]+[，。！？；]?)/g;
             const matches = [];
             let match;
@@ -690,93 +868,59 @@ margin: 15px 0;
                 }
             }
             
-            // 处理最后可能没有标点的部分
-            const lastIndex = matches.join('').length;
-            if (lastIndex < sentence.length) {
-                matches.push(sentence.substring(lastIndex));
-            }
-            
-            return matches.filter(part => part.trim() !== '');
+            return matches;
         }
 
         // 辅助函数：检查分句是否以结束标点结尾
         function hasEndingPunctuation(part) {
-            const endingPunctuation = ['。', '？', '！', '；', '……'];
+            const endingPunctuation = ['。', '？', '！', '；'];
             return endingPunctuation.some(punc => part.endsWith(punc));
         }
 
-        // 生成问题（添加了两种题型）
+        // 生成问题
         function generateQuestion() {
             if (!currentText) return;
             
-            let validQuestionFound = false;
-            let question = null;
-            let attempts = 0;
-            const maxAttempts = 20; // 防止无限循环
-            
             // 随机选择题型 (0: 填写下句, 1: 填写上句)
-            // 60%概率填写下句，40%概率填写上句
             const questionType = Math.random() < 0.6 ? 0 : 1;
             
-            while (!validQuestionFound && attempts < maxAttempts) {
-                attempts++;
-                
-                // 随机选择一个句子
-                const sentenceIndex = Math.floor(Math.random() * currentText.content.length);
-                const sentence = currentText.content[sentenceIndex];
-                
-                // 分割句子
-                const parts = splitSentence(sentence);
-                
-                if (parts.length < 3) {
-                    continue; // 跳过太短的句子
-                }
-                
-                // 根据题型确定起始位置
-                let startIndex;
-                if (questionType === 0) { // 填写下句
-                    startIndex = Math.floor(Math.random() * (parts.length - 1));
-                    // 检查当前分句是否以结束标点结尾
-                    if (hasEndingPunctuation(parts[startIndex])) {
-                        continue;
-                    }
-                } else { // 填写上句
-                    startIndex = Math.floor(Math.random() * (parts.length - 1)) + 1;
-                    // 检查当前分句是否以结束标点结尾
-                    if (hasEndingPunctuation(parts[startIndex])) {
-                        continue;
-                    }
-                }
-                
-                // 创建问题对象
-                question = {
-                    type: questionType, // 0: 填写下句, 1: 填写上句
-                    sentence: sentence,
-                    parts: parts,
-                    currentIndex: startIndex,
-                    answerIndex: questionType === 0 ? startIndex + 1 : startIndex - 1,
-                    answer: questionType === 0 ? parts[startIndex + 1] : parts[startIndex - 1]
-                };
-                
-                validQuestionFound = true;
+            let sentenceIndex = Math.floor(Math.random() * currentText.content.length);
+            let sentence = currentText.content[sentenceIndex];
+            let parts = splitSentence(sentence);
+            
+            // 如果句子太短，尝试另一个句子
+            if (parts.length < 2) {
+                sentenceIndex = (sentenceIndex + 1) % currentText.content.length;
+                sentence = currentText.content[sentenceIndex];
+                parts = splitSentence(sentence);
             }
             
-            if (!validQuestionFound) {
-                // 如果找不到合适的问题，使用默认方法生成（填写下句）
-                const sentenceIndex = Math.floor(Math.random() * currentText.content.length);
-                const sentence = currentText.content[sentenceIndex];
-                const parts = splitSentence(sentence);
-                const startIndex = Math.min(parts.length - 2, 0); // 确保有后续分句
-                
-                question = {
-                    type: 0, // 默认填写下句
-                    sentence: sentence,
-                    parts: parts,
-                    currentIndex: startIndex,
-                    answerIndex: startIndex + 1,
-                    answer: parts[startIndex + 1]
-                };
+            let startIndex;
+            if (questionType === 0) { // 填写下句
+                // 确保不是最后一个分句
+                startIndex = Math.floor(Math.random() * Math.max(1, parts.length - 2));
+                // 如果当前分句以结束标点结尾，则选择下一个
+                if (hasEndingPunctuation(parts[startIndex])) {
+                    startIndex = (startIndex + 1) % parts.length;
+                }
+            } else { // 填写上句
+                // 确保不是第一个分句
+                startIndex = Math.max(1, Math.floor(Math.random() * parts.length));
+                // 如果当前分句以结束标点结尾，则选择前一个
+                if (hasEndingPunctuation(parts[startIndex])) {
+                    startIndex = (startIndex - 1 + parts.length) % parts.length;
+                }
             }
+            
+            // 创建问题对象
+            const question = {
+                type: questionType,
+                sentence: sentence,
+                parts: parts,
+                currentIndex: startIndex,
+                answerIndex: questionType === 0 ? startIndex + 1 : startIndex - 1,
+                answer: questionType === 0 ? parts[startIndex + 1] : parts[startIndex - 1]
+            };
             
             // 保存问题到历史
             questionHistory.push(question);
@@ -786,7 +930,7 @@ margin: 15px 0;
             displayQuestion(question);
         }
 
-        // 显示问题（支持两种题型）
+        // 显示问题
         function displayQuestion(question) {
             const { type, parts, currentIndex, answer } = question;
             
@@ -872,8 +1016,8 @@ margin: 15px 0;
         // 显示答案
         function showAnswer() {
             questionElement.classList.add('show-answer');
-            resultElement.className = 'result correct active';
-            resultElement.textContent = '✓ 正确答案已展示';
+            resultElement.className = 'result';
+            resultElement.textContent = '';
             showAnswerBtn.style.display = 'none';
             hideAnswerBtn.style.display = 'inline-flex';
             answerVisible = true;
@@ -899,11 +1043,11 @@ margin: 15px 0;
             if (currentHistoryIndex < questionHistory.length - 1) {
                 // 浏览历史中的下一题
                 currentHistoryIndex++;
-                hideAnswer(); // 确保隐藏答案
+                hideAnswer();
                 displayQuestion(questionHistory[currentHistoryIndex]);
             } else {
                 // 生成新题目
-                hideAnswer(); // 确保隐藏答案
+                hideAnswer();
                 generateQuestion();
             }
         });
@@ -912,14 +1056,91 @@ margin: 15px 0;
         prevBtn.addEventListener('click', () => {
             if (currentHistoryIndex > 0) {
                 currentHistoryIndex--;
-                hideAnswer(); // 确保隐藏答案
+                hideAnswer();
                 displayQuestion(questionHistory[currentHistoryIndex]);
             }
         });
 
         // 游戏说明
         instructionsBtn.addEventListener('click', () => {
-            alert("游戏说明：\n\n1. 从下拉菜单中选择一篇高中必背课文\n2. 点击'开始挑战'进入游戏\n3. 系统会随机显示以下两种题型：\n   - 填写下一小句（蓝色标签）\n   - 填写上一小句（橙色标签）\n4. 点击'显示答案'在横线处查看正确答案\n5. 点击'上一题'或'下一题'浏览题目\n6. 使用篇目选择框可以随时切换背诵内容\n\n祝你挑战成功！");
+            alert("游戏说明：\n\n1. 从下拉菜单中选择一篇高中必背课文\n2. 点击'开始挑战'进入游戏\n3. 系统会随机显示以下两种题型：\n   - 填写下一小句（蓝色标签）\n   - 填写上一小句（橙色标签）\n4. 点击'显示答案'在横线处查看正确答案\n5. 点击'上一题'或'下一题'浏览题目\n6. 使用篇目选择框可以随时切换背诵内容\n7. 点击'添加自定义文章'可导入自己的文章内容\n\n祝你挑战成功！");
+        });
+
+        // 自定义文章功能
+        customTextBtn.addEventListener('click', () => {
+            customTextModal.style.display = 'flex';
+        });
+
+        closeModalBtn.addEventListener('click', () => {
+            customTextModal.style.display = 'none';
+        });
+
+        cancelCustomTextBtn.addEventListener('click', () => {
+            customTextModal.style.display = 'none';
+        });
+
+        submitCustomTextBtn.addEventListener('click', () => {
+            const title = customTitleInput.value.trim();
+            const content = customContentInput.value.trim();
+            
+            if (!title) {
+                alert('请输入文章标题！');
+                return;
+            }
+            
+            if (!content) {
+                alert('请输入文章内容！');
+                return;
+            }
+            
+            // 将文章内容按段落分割
+            const paragraphs = content.split('\n').filter(p => p.trim() !== '');
+            
+            if (paragraphs.length === 0) {
+                alert('文章内容不能为空！');
+                return;
+            }
+            
+            // 创建自定义文章ID
+            const customId = `custom-${Date.now()}`;
+            
+            // 添加到文章库
+            texts[customId] = {
+                title: title,
+                content: paragraphs
+            };
+            
+            // 更新选择框
+            const option = document.createElement('option');
+            option.value = customId;
+            option.textContent = title;
+            
+            textSelection.appendChild(option);
+            textSwitch.appendChild(option.cloneNode(true));
+            
+            // 设置当前选择
+            textSelection.value = customId;
+            textSwitch.value = customId;
+            
+            // 关闭模态框
+            customTextModal.style.display = 'none';
+            
+            // 清空输入框
+            customTitleInput.value = '';
+            customContentInput.value = '';
+            
+            // 提示用户
+            alert('自定义文章添加成功！即将开始挑战...');
+            
+            // 自动开始挑战
+            startBtn.click();
+        });
+
+        // 点击模态框外部关闭
+        customTextModal.addEventListener('click', (e) => {
+            if (e.target === customTextModal) {
+                customTextModal.style.display = 'none';
+            }
         });
     </script>
 </body>
