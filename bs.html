@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高中语文背诵挑战赛</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #333;
+            font-family: 'Noto Serif SC', serif;
+            transition: all 0.5s ease;
+        }
+        
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            position: relative;
+            transition: all 0.4s ease;
+        }
+        
+        .header {
+            background: linear-gradient(90deg, #8e44ad, #3498db);
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+        
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 Q50,20 100,0 L100,100 Q50,80 0,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: 100% 100%;
+        }
+        
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            font-family: 'Ma Shan Zheng', cursive;
+            transition: all 0.3s ease;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .content {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            transition: all 0.4s ease;
+        }
+        
+        .game-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .selection-box {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e9ecef;
+            transition: all 0.4s ease;
+        }
+        
+        .selection-box h2 {
+            color: #6c5ce7;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transform: scale(1);
+        }
+        
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .btn:active {
+            transform: scale(0.98);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(90deg, #6c5ce7, #3498db);
+            color: white;
+            box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #6c5ce7;
+            color: #6c5ce7;
+        }
+        
+        .btn-outline:hover {
+            background: rgba(108, 92, 231, 0.1);
+        }
+        
+        .btn-warning {
+            background: linear-gradient(90deg, #f39c12, #e67e22);
+            color: white;
+        }
+        
+        .btn-info {
+            background: linear-gradient(90deg, #00cec9, #0984e3);
+            color: white;
+        }
+        
+        select {
+            width: 100%;
+            padding: 15px;
+            border-radius: 12px;
+            border: 2px solid #e0e0e0;
+            font-size: 1.1rem;
+            background: white;
+            transition: all 0.3s;
+            font-family: 'Noto Serif SC', serif;
+        }
+        
+        select:focus {
+            border-color: #6c5ce7;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
+        }
+        
+        .game-area {
+            display: none;
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e9ecef;
+            text-align: center;
+            transition: all 0.5s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .game-area.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .question-container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 25px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid #6c5ce7;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+        
+        .question {
+            font-size: 1.8rem;
+            line-height: 1.8;
+            color: #2d3436;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Ma Shan Zheng', cursive;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+        
+        .question-part {
+            display: flex;
+flex-direction: column;   /* 改为垂直排列 */
+align-items: center;      /* 居中 */
+margin: 15px 0;
+        }
+        
+        .blank-container {
+            display: inline-flex;
+            align-items: center;
+            margin: 0 5px;
+            position: relative;
+            vertical-align: middle;
+        }
+        
+        .blank-line {
+            display: inline-block;
+            min-width: 100px;
+            border-bottom: 3px dashed #6c5ce7;
+            position: relative;
+            height: 1.5em;
+            transition: all 0.3s ease, width 0.3s ease;
+        }
+        
+        .answer-text {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            color: #6c5ce7;
+            font-weight: bold;
+            display: none;
+            font-family: 'Ma Shan Zheng', cursive;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .show-answer .answer-text {
+            display: block;
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 12px;
+            display: none;
+            font-size: 1.3rem;
+            font-family: 'Ma Shan Zheng', cursive;
+            transition: all 0.4s ease;
+        }
+        
+        .result.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .result.correct {
+            background: rgba(46, 204, 113, 0.15);
+            color: #27ae60;
+            border: 2px solid #2ecc71;
+        }
+        
+        .result.incorrect {
+            background: rgba(231, 76, 60, 0.15);
+            color: #c0392b;
+            border: 2px solid #e74c3c;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            background: #f8f9fa;
+            border-top: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+        
+        .chinese-pattern {
+            position: absolute;
+            opacity: 0.03;
+            font-size: 10rem;
+            transform: rotate(-30deg);
+            z-index: 0;
+            pointer-events: none;
+            font-family: 'Ma Shan Zheng', cursive;
+            transition: all 0.5s ease;
+        }
+        
+        .pattern-1 {
+            top: 20px;
+            left: 20px;
+        }
+        
+        .pattern-2 {
+            bottom: 20px;
+            right: 20px;
+        }
+        
+        .question-counter {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            margin-bottom: 15px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .text-selection-container {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .text-selection-container label {
+            font-size: 1.2rem;
+            color: #6c5ce7;
+            font-weight: bold;
+        }
+        
+        .navigation-controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .question-type-tag {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-left: 10px;
+            vertical-align: middle;
+            background: #6c5ce7;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .question-type-tag.next {
+            background: #3498db;
+        }
+        
+        .question-type-tag.prev {
+            background: #e67e22;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes fadeOut {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(-10px); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        .slide-in {
+            animation: slideIn 0.4s ease forwards;
+        }
+        
+        .fade-out {
+            animation: fadeOut 0.4s ease forwards;
+        }
+        
+        .pulse {
+            animation: pulse 0.6s ease;
+        }
+        
+        .question-prompt {
+            font-size: 1.3rem;
+            color: #6c5ce7;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .content {
+                padding: 25px;
+            }
+            
+            .question {
+                font-size: 1.5rem;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+            
+            .question-container {
+                padding: 20px;
+            }
+            
+            .text-selection-container {
+                flex-direction: column;
+            }
+            
+            .blank-line {
+                min-width: 80px;
+            }
+            
+            .question-type-tag {
+                font-size: 0.8rem;
+                padding: 3px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-book-open"></i> 高中语文背诵挑战赛</h1>
+            <p>选择经典篇目，挑战你的记忆，巩固语文知识</p>
+        </div>
+        
+        <div class="content">
+            <div class="selection-box">
+                <h2><i class="fas fa-book"></i> 选择背诵篇目</h2>
+                <select id="text-selection">
+                    <option value="">-- 请选择要背诵的篇目 --</option>
+                    <option value="shuoshin">《师说》 - 韩愈</option>
+                    <option value="chuxue">《劝学》 - 荀子</option>
+                    <option value="yuejialou">《岳阳楼记》 - 范仲淹</option>
+                    <option value="chuchibiao">《出师表》 - 诸葛亮</option>
+                    <option value="shuofu">《阿房宫赋》 - 杜牧</option>
+                </select>
+                
+                <div class="game-controls">
+                    <button id="start-btn" class="btn btn-primary">
+                        <i class="fas fa-play"></i> 开始挑战
+                    </button>
+                    <button id="instructions-btn" class="btn btn-outline">
+                        <i class="fas fa-info-circle"></i> 游戏说明
+                    </button>
+                </div>
+            </div>
+            
+            <div class="game-area" id="game-area">
+                <div class="text-selection-container">
+                    <label for="text-switch"><i class="fas fa-exchange-alt"></i> 切换篇目：</label>
+                    <select id="text-switch">
+                        <option value="shuoshin">《师说》 - 韩愈</option>
+                        <option value="chuxue">《劝学》 - 荀子</option>
+                        <option value="yuejialou">《岳阳楼记》 - 范仲淹</option>
+                        <option value="chuchibiao">《出师表》 - 诸葛亮</option>
+                        <option value="shuofu">《阿房宫赋》 - 杜牧</option>
+                    </select>
+                </div>
+                
+                <h2 id="current-text-title">《劝学》 - 背诵挑战</h2>
+                
+                <div class="question-counter">
+                    题目 <span id="question-count">1</span>
+                    <span class="question-type-tag next" id="question-type">填写下句</span>
+                </div>
+                
+                <div class="question-container">
+                    <div class="question-prompt" id="question-prompt">请填写下一小句：</div>
+                    <div class="question" id="question">
+                        <div class="question-part">
+                            <span>故不积跬步，</span>
+                            <div class="blank-container">
+                                <span class="blank-line"></span>
+                                <span class="answer-text">无以至千里</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="result" id="result"></div>
+                
+                <div class="game-controls">
+                    <button id="show-answer-btn" class="btn btn-warning">
+                        <i class="fas fa-eye"></i> 显示答案
+                    </button>
+                    <button id="hide-answer-btn" class="btn btn-outline" style="display:none;">
+                        <i class="fas fa-eye-slash"></i> 隐藏答案
+                    </button>
+                </div>
+                
+                <div class="navigation-controls">
+                    <button id="prev-btn" class="btn btn-info">
+                        <i class="fas fa-arrow-left"></i> 上一题
+                    </button>
+                    <button id="next-btn" class="btn btn-primary">
+                        <i class="fas fa-arrow-right"></i> 下一题
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>高中语文背诵挑战赛 © 2025 | 设计用于班级语文学习活动</p>
+        </div>
+        
+        <div class="chinese-pattern pattern-1">文</div>
+        <div class="chinese-pattern pattern-2">诗</div>
+    </div>
+
+    <script>
+        // 课文数据库（以完整篇章存储）
+        const texts = {
+            shuoshin: {
+                title: "《师说》 - 韩愈",
+                content: [
+                    "古之学者必有师。师者，所以传道受业解惑也。人非生而知之者，孰能无惑？惑而不从师，其为惑也，终不解矣。生乎吾前，其闻道也固先乎吾，吾从而师之；生乎吾后，其闻道也亦先乎吾，吾从而师之。吾师道也，夫庸知其年之先后生于吾乎？是故无贵无贱，无长无少，道之所存，师之所存也。",
+                    "嗟乎！师道之不传也久矣！欲人之无惑也难矣！古之圣人，其出人也远矣，犹且从师而问焉；今之众人，其下圣人也亦远矣，而耻学于师。是故圣益圣，愚益愚。圣人之所以为圣，愚人之所以为愚，其皆出于此乎？爱其子，择师而教之；于其身也，则耻师焉，惑矣。彼童子之师，授之书而习其句读者，非吾所谓传其道解其惑者也。",
+                    "句读之不知，惑之不解，或师焉，或不焉，小学而大遗，吾未见其明也。巫医乐师百工之人，不耻相师。士大夫之族，曰师曰弟子云者，则群聚而笑之。问之，则曰：彼与彼年相若也，道相似也。位卑则足羞，官盛则近谀。呜呼！师道之不复可知矣。巫医乐师百工之人，君子不齿，今其智乃反不能及，其可怪也欤！",
+                    "圣人无常师。孔子师郯子、苌弘、师襄、老聃。郯子之徒，其贤不及孔子。孔子曰：三人行，则必有我师。是故弟子不必不如师，师不必贤于弟子，闻道有先后，术业有专攻，如是而已。李氏子蟠，年十七，好古文，六艺经传皆通习之，不拘于时，学于余。余嘉其能行古道，作师说以贻之。"
+                ]
+            },
+            chuxue: {
+                title: "《劝学》 - 荀子",
+                content: [
+                    "君子曰：学不可以已。青，取之于蓝，而青于蓝；冰，水为之，而寒于水。木直中绳，輮以为轮，其曲中规。虽有槁暴，不复挺者，輮使之然也。故木受绳则直，金就砺则利，君子博学而日参省乎己，则知明而行无过矣。",
+                    "吾尝终日而思矣，不如须臾之所学也；吾尝跂而望矣，不如登高之博见也。登高而招，臂非加长也，而见者远；顺风而呼，声非加疾也，而闻者彰。假舆马者，非利足也，而致千里；假舟楫者，非能水也，而绝江河。君子生非异也，善假于物也。",
+                    "积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里；不积小流，无以成江海。骐骥一跃，不能十步；驽马十驾，功在不舍。锲而舍之，朽木不折；锲而不舍，金石可镂。",
+                    "蚓无爪牙之利，筋骨之强，上食埃土，下饮黄泉，用心一也。蟹六跪而二螯，非蛇鳝之穴无可寄托者，用心躁也。"
+                ]
+            },
+            chuchibiao: {
+                title: "《出师表》 - 诸葛亮",
+                content: [
+                    "先帝创业未半而中道崩殂，今天下三分，益州疲弊，此诚危急存亡之秋也。然侍卫之臣不懈于内，忠志之士忘身于外者，盖追先帝之殊遇，欲报之于陛下也。",
+                    "诚宜开张圣听，以光先帝遗德，恢弘志士之气，不宜妄自菲薄，引喻失义，以塞忠谏之路也。宫中府中，俱为一体，陟罚臧否，不宜异同。若有作奸犯科及为忠善者，宜付有司论其刑赏，以昭陛下平明之理，不宜偏私，使内外异法也。",
+                    "侍中、侍郎郭攸之、费祎、董允等，此皆良实，志虑忠纯，是以先帝简拔以遗陛下。愚以为宫中之事，事无大小，悉以咨之，然后施行，必能裨补阙漏，有所广益。",
+                    "将军向宠，性行淑均，晓畅军事，试用于昔日，先帝称之曰能，是以众议举宠为督。愚以为营中之事，悉以咨之，必能使行阵和睦，优劣得所。",
+                    "亲贤臣，远小人，此先汉所以兴隆也；亲小人，远贤臣，此后汉所以倾颓也。先帝在时，每与臣论此事，未尝不叹息痛恨于桓、灵也。侍中、尚书、长史、参军，此悉贞良死节之臣，愿陛下亲之信之，则汉室之隆，可计日而待也。"
+                ]
+            },
+            shuofu: {
+                title: "《阿房宫赋》 - 杜牧",
+                content: [
+                    "六王毕，四海一，蜀山兀，阿房出。覆压三百余里，隔离天日。骊山北构而西折，直走咸阳。二川溶溶，流入宫墙。五步一楼，十步一阁；廊腰缦回，檐牙高啄；各抱地势，钩心斗角。盘盘焉，囷囷焉，蜂房水涡，矗不知其几���万落。",
+                    "长桥卧波，未云何龙？复道行空，不霁何虹？高低冥迷，不知西东。歌台暖响，春光融融；舞殿冷袖，风雨凄凄。一日之内，一宫之间，而气候不齐。",
+                    "妃嫔媵嫱，王子皇孙，辞楼下殿，辇来于秦。朝歌夜弦，为秦宫人。明星荧荧，开妆镜也；绿云扰扰，梳晓鬟也；渭流涨腻，弃脂水也；烟斜雾横，焚椒兰也。雷霆乍惊，宫车过也；辘辘远听，杳不知其所之也。一肌一容，尽态极妍，缦立远视，而望幸焉；有不得见者三十六年。",
+                    "燕赵之收藏，韩魏之经营，齐楚之精英，几世几年，剽掠其人，倚叠如山；一旦不能有，输来其间。鼎铛玉石，金块珠砾，弃掷逦迤，秦人视之，亦不甚惜。",
+                    "嗟乎！一人之心，千万人之心也。秦爱纷奢，人亦念其家。奈何取之尽锱铢，用之如泥沙？使负栋之柱，多于南亩之农夫；架梁之椽，多于机上之工女；钉头磷磷，多于在庾之粟粒；瓦缝参差，多于周身之帛缕；直栏横槛，多于九土之城郭；管弦呕哑，多于市人之言语。使天下之人，不敢言而敢怒。独夫之心，日益骄固。戍卒叫，函谷举，楚人一炬，可怜焦土！"
+                ]
+            },
+            yuejialou: {
+                title: "《岳阳楼记》 - 范仲淹",
+                content: [
+                    "庆历四年春，滕子京谪守巴陵郡。越明年，政通人和，百废具兴。乃重修岳阳楼，增其旧制，刻唐贤今人诗赋于其上。属予作文以记之。",
+                    "予观夫巴陵胜状，在洞庭一湖。衔远山，吞长江，浩浩汤汤，横无际涯；朝晖夕阴，气象万千。此则岳阳楼之大观也，前人之述备矣。然则北通巫峡，南极潇湘，迁客骚人，多会于此，览物之情，得无异乎？",
+                    "若夫霪雨霏霏，连月不开，阴风怒号，浊浪排空；日星隐曜，山岳潜形；商旅不行，樯倾楫摧；薄暮冥冥，虎啸猿啼。登斯楼也，则有去国怀乡，忧谗畏讥，满目萧然，感极而悲者矣。",
+                    "至若春和景明，波澜不惊，上下天光，一碧万顷；沙鸥翔集，锦鳞游泳；岸芷汀兰，郁郁青青。而或长烟一空，皓月千里，浮光跃金，静影沉璧，渔歌互答，此乐何极！登斯楼也，则有心旷神怡，宠辱偕忘，把酒临风，其喜洋洋者矣。",
+                    "嗟夫！予尝求古仁人之心，或异二者之为，何哉？不以物喜，不以己悲；居庙堂之高则忧其民；处江湖之远则忧其君。是进亦忧，退亦忧。然则何时而乐耶？其必曰：先天下之忧而忧，后天下之乐而乐乎。噫！微斯人，吾谁与归？"
+                ]
+            }
+        };
+
+        // DOM元素
+        const textSelection = document.getElementById('text-selection');
+        const textSwitch = document.getElementById('text-switch');
+        const startBtn = document.getElementById('start-btn');
+        const gameArea = document.getElementById('game-area');
+        const currentTextTitle = document.getElementById('current-text-title');
+        const questionElement = document.getElementById('question');
+        const questionPrompt = document.getElementById('question-prompt');
+        const nextBtn = document.getElementById('next-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const resultElement = document.getElementById('result');
+        const questionCountElement = document.getElementById('question-count');
+        const instructionsBtn = document.getElementById('instructions-btn');
+        const showAnswerBtn = document.getElementById('show-answer-btn');
+        const hideAnswerBtn = document.getElementById('hide-answer-btn');
+        const questionTypeElement = document.getElementById('question-type');
+
+        // 游戏状态
+        let currentText = null;
+        let questionCount = 1;
+        let currentQuestion = null;
+        let questionHistory = [];
+        let currentHistoryIndex = -1;
+        let answerVisible = false;
+
+        // 开始游戏
+        startBtn.addEventListener('click', () => {
+            const selectedText = textSelection.value;
+            if (!selectedText) {
+                alert('请选择一篇课文！');
+                return;
+            }
+            
+            currentText = texts[selectedText];
+            textSwitch.value = selectedText;
+            questionHistory = [];
+            currentHistoryIndex = -1;
+            answerVisible = false;
+            
+            // 动画效果
+            document.querySelector('.selection-box').classList.add('fade-out');
+            setTimeout(() => {
+                document.querySelector('.selection-box').style.display = 'none';
+                gameArea.style.display = 'block';
+                gameArea.classList.add('active');
+                updateGameUI();
+                generateQuestion();
+            }, 400);
+        });
+
+        // 切换篇目
+        textSwitch.addEventListener('change', () => {
+            const selectedText = textSwitch.value;
+            currentText = texts[selectedText];
+            questionHistory = [];
+            currentHistoryIndex = -1;
+            answerVisible = false;
+            
+            // 平滑过渡效果
+            gameArea.classList.remove('active');
+            setTimeout(() => {
+                updateGameUI();
+                generateQuestion();
+                gameArea.classList.add('active');
+            }, 300);
+        });
+
+        // 更新游戏UI
+        function updateGameUI() {
+            currentTextTitle.textContent = currentText.title;
+            questionCount = 1;
+            questionCountElement.textContent = questionCount;
+            resultElement.className = 'result';
+            hideAnswer();
+        }
+
+        // 改进的分句函数 - 移除了顿号作为分隔符
+        function splitSentence(sentence) {
+            // 使用新的正则表达式：顿号不作为分隔符
+            const regex = /([^，。！？；]+[，。！？；]?)/g;
+            const matches = [];
+            let match;
+            
+            while ((match = regex.exec(sentence)) !== null) {
+                if (match[0].trim() !== '') {
+                    matches.push(match[0]);
+                }
+            }
+            
+            // 处理最后可能没有标点的部分
+            const lastIndex = matches.join('').length;
+            if (lastIndex < sentence.length) {
+                matches.push(sentence.substring(lastIndex));
+            }
+            
+            return matches.filter(part => part.trim() !== '');
+        }
+
+        // 辅助函数：检查分句是否以结束标点结尾
+        function hasEndingPunctuation(part) {
+            const endingPunctuation = ['。', '？', '！', '；', '……'];
+            return endingPunctuation.some(punc => part.endsWith(punc));
+        }
+
+        // 生成问题（添加了两种题型）
+        function generateQuestion() {
+            if (!currentText) return;
+            
+            let validQuestionFound = false;
+            let question = null;
+            let attempts = 0;
+            const maxAttempts = 20; // 防止无限循环
+            
+            // 随机选择题型 (0: 填写下句, 1: 填写上句)
+            // 60%概率填写下句，40%概率填写上句
+            const questionType = Math.random() < 0.6 ? 0 : 1;
+            
+            while (!validQuestionFound && attempts < maxAttempts) {
+                attempts++;
+                
+                // 随机选择一个句子
+                const sentenceIndex = Math.floor(Math.random() * currentText.content.length);
+                const sentence = currentText.content[sentenceIndex];
+                
+                // 分割句子
+                const parts = splitSentence(sentence);
+                
+                if (parts.length < 3) {
+                    continue; // 跳过太短的句子
+                }
+                
+                // 根据题型确定起始位置
+                let startIndex;
+                if (questionType === 0) { // 填写下句
+                    startIndex = Math.floor(Math.random() * (parts.length - 1));
+                    // 检查当前分句是否以结束标点结尾
+                    if (hasEndingPunctuation(parts[startIndex])) {
+                        continue;
+                    }
+                } else { // 填写上句
+                    startIndex = Math.floor(Math.random() * (parts.length - 1)) + 1;
+                    // 检查当前分句是否以结束标点结尾
+                    if (hasEndingPunctuation(parts[startIndex])) {
+                        continue;
+                    }
+                }
+                
+                // 创建问题对象
+                question = {
+                    type: questionType, // 0: 填写下句, 1: 填写上句
+                    sentence: sentence,
+                    parts: parts,
+                    currentIndex: startIndex,
+                    answerIndex: questionType === 0 ? startIndex + 1 : startIndex - 1,
+                    answer: questionType === 0 ? parts[startIndex + 1] : parts[startIndex - 1]
+                };
+                
+                validQuestionFound = true;
+            }
+            
+            if (!validQuestionFound) {
+                // 如果找不到合适的问题，使用默认方法生成（填写下句）
+                const sentenceIndex = Math.floor(Math.random() * currentText.content.length);
+                const sentence = currentText.content[sentenceIndex];
+                const parts = splitSentence(sentence);
+                const startIndex = Math.min(parts.length - 2, 0); // 确保有后续分句
+                
+                question = {
+                    type: 0, // 默认填写下句
+                    sentence: sentence,
+                    parts: parts,
+                    currentIndex: startIndex,
+                    answerIndex: startIndex + 1,
+                    answer: parts[startIndex + 1]
+                };
+            }
+            
+            // 保存问题到历史
+            questionHistory.push(question);
+            currentHistoryIndex = questionHistory.length - 1;
+            
+            // 显示问题
+            displayQuestion(question);
+        }
+
+        // 显示问题（支持两种题型）
+        function displayQuestion(question) {
+            const { type, parts, currentIndex, answer } = question;
+            
+            // 添加动画效果
+            questionElement.classList.remove('fade-in');
+            void questionElement.offsetWidth;
+            questionElement.classList.add('fade-in');
+            
+            // 更新题目计数
+            questionCount = currentHistoryIndex + 1;
+            questionCountElement.textContent = questionCount;
+            
+            // 更新题型标签和样式
+            questionTypeElement.textContent = type === 0 ? "填写下句" : "填写上句";
+            questionTypeElement.className = type === 0 ? "question-type-tag next" : "question-type-tag prev";
+            questionTypeElement.classList.add('pulse');
+            setTimeout(() => {
+                questionTypeElement.classList.remove('pulse');
+            }, 600);
+            
+            // 设置提示
+            questionPrompt.textContent = type === 0 ? 
+                "请答出下一句：" : "请答出上一句：";
+            
+            // 构建问题显示
+            let questionHTML;
+            
+            if (type === 0) { // 填写下句
+                questionHTML = `
+                    <div class="question-part">
+                        <span>${parts[currentIndex]}</span>
+                        <div class="blank-container">
+                            <span class="blank-line"></span>
+                            <span class="answer-text">${answer}</span>
+                        </div>
+                    </div>
+                `;
+            } else { // 填写上句
+                questionHTML = `
+                    <div class="question-part">
+                        <div class="blank-container">
+                            <span class="blank-line"></span>
+                            <span class="answer-text">${answer}</span>
+                        </div>
+                        <span>${parts[currentIndex]}</span>
+                    </div>
+                `;
+            }
+            
+            questionElement.innerHTML = questionHTML;
+            
+            // 动态调整下划线宽度以匹配答案文本
+            setTimeout(() => {
+                const answerText = questionElement.querySelector('.answer-text');
+                const blankLine = questionElement.querySelector('.blank-line');
+                if (answerText && blankLine) {
+                    // 创建临时元素测量文本宽度
+                    const tempSpan = document.createElement('span');
+                    tempSpan.style.visibility = 'hidden';
+                    tempSpan.style.position = 'absolute';
+                    tempSpan.style.whiteSpace = 'nowrap';
+                    tempSpan.style.fontFamily = 'Ma Shan Zheng, cursive';
+                    tempSpan.style.fontSize = '1.8rem';
+                    tempSpan.textContent = answerText.textContent;
+                    document.body.appendChild(tempSpan);
+                    
+                    const answerWidth = tempSpan.offsetWidth;
+                    document.body.removeChild(tempSpan);
+                    
+                    // 设置下划线宽度（至少为100px）
+                    blankLine.style.width = `${Math.max(answerWidth + 10, 100)}px`;
+                }
+            }, 50);
+            
+            // 根据答案显示状态更新
+            if (answerVisible) {
+                showAnswer();
+            } else {
+                hideAnswer();
+            }
+        }
+
+        // 显示答案
+        function showAnswer() {
+            questionElement.classList.add('show-answer');
+            resultElement.className = 'result correct active';
+            resultElement.textContent = '✓ 正确答案已展示';
+            showAnswerBtn.style.display = 'none';
+            hideAnswerBtn.style.display = 'inline-flex';
+            answerVisible = true;
+        }
+
+        // 隐藏答案
+        function hideAnswer() {
+            questionElement.classList.remove('show-answer');
+            resultElement.className = 'result';
+            showAnswerBtn.style.display = 'inline-flex';
+            hideAnswerBtn.style.display = 'none';
+            answerVisible = false;
+        }
+
+        // 显示答案按钮
+        showAnswerBtn.addEventListener('click', showAnswer);
+
+        // 隐藏答案按钮
+        hideAnswerBtn.addEventListener('click', hideAnswer);
+
+        // 下一题
+        nextBtn.addEventListener('click', () => {
+            if (currentHistoryIndex < questionHistory.length - 1) {
+                // 浏览历史中的下一题
+                currentHistoryIndex++;
+                hideAnswer(); // 确保隐藏答案
+                displayQuestion(questionHistory[currentHistoryIndex]);
+            } else {
+                // 生成新题目
+                hideAnswer(); // 确保隐藏答案
+                generateQuestion();
+            }
+        });
+
+        // 上一题
+        prevBtn.addEventListener('click', () => {
+            if (currentHistoryIndex > 0) {
+                currentHistoryIndex--;
+                hideAnswer(); // 确保隐藏答案
+                displayQuestion(questionHistory[currentHistoryIndex]);
+            }
+        });
+
+        // 游戏说明
+        instructionsBtn.addEventListener('click', () => {
+            alert("游戏说明：\n\n1. 从下拉菜单中选择一篇高中必背课文\n2. 点击'开始挑战'进入游戏\n3. 系统会随机显示以下两种题型：\n   - 填写下一小句（蓝色标签）\n   - 填写上一小句（橙色标签）\n4. 点击'显示答案'在横线处查看正确答案\n5. 点击'上一题'或'下一题'浏览题目\n6. 使用篇目选择框可以随时切换背诵内容\n\n祝你挑战成功！");
+        });
+    </script>
+</body>
+</html>
