@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -172,6 +172,17 @@
             color: white;
         }
         
+        .btn-disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        
+        .btn-disabled:hover {
+            transform: scale(1);
+            box-shadow: none;
+        }
+        
         select {
             width: 90%;
             padding: 15px;
@@ -225,7 +236,7 @@
         }
         
         .question {
-            font-size: 1.8rem;
+            font-size: 2.0rem;
             line-height: 1.8;
             color: #2d3436;
             display: flex;
@@ -273,6 +284,7 @@
             font-family: 'Ma Shan Zheng', cursive;
             text-align: center;
             animation: fadeIn 0.5s ease;
+            white-space:nowrap;
         }
         
         .show-answer .answer-text {
@@ -304,6 +316,12 @@
             background: rgba(231, 76, 60, 0.15);
             color: #c0392b;
             border: 2px solid #e74c3c;
+        }
+        
+        .result.info {
+            background: rgba(52, 152, 219, 0.15);
+            color: #2980b9;
+            border: 2px solid #3498db;
         }
         
         .footer {
@@ -556,7 +574,7 @@
             }
             
             .question {
-                font-size: 1.5rem;
+                font-size: 2.0rem;
             }
             
             .btn {
@@ -613,6 +631,8 @@
                     <option value="yuejialou">《岳阳楼记》 - 范仲淹</option>
                     <option value="chuchibiao">《出师表》 - 诸葛亮</option>
                     <option value="shuofu">《阿房宫赋》 - 杜牧</option>
+                    <option value="taohuayuan">《桃花源记》 - 陶渊明</option>
+                    <option value="chibi">《赤壁赋》 - 苏轼</option>
                 </select>
                 
                 <div class="game-controls">
@@ -637,6 +657,8 @@
                         <option value="yuejialou">《岳阳楼记》 - 范仲淹</option>
                         <option value="chuchibiao">《出师表》 - 诸葛亮</option>
                         <option value="shuofu">《阿房宫赋》 - 杜牧</option>
+                        <option value="taohuayuan">《桃花源记》 - 陶渊明</option>
+                        <option value="chibi">《赤壁赋》 - 苏轼</option>
                     </select>
                 </div>
                 
@@ -726,7 +748,7 @@
                 title: "《师说》 - 韩愈",
                 content: [
                     "古之学者必有师。师者，所以传道受业解惑也。人非生而知之者，孰能无惑？惑而不从师，其为惑也，终不解矣。生乎吾前，其闻道也固先乎吾，吾从而师之；生乎吾后，其闻道也亦先乎吾，吾从而师之。吾师道也，夫庸知其年之先后生于吾乎？是故无贵无贱，无长无少，道之所存，师之所存也。",
-                    "嗟乎！师道之不传也久矣！欲人之无惑也难矣！古之圣人，其出人也远矣，犹且从师而问焉；今之众人，其下圣人也亦远矣，而耻学于师。是故圣益圣，愚益愚。圣人之所以为圣，愚人之所以为愚，其皆出于此乎？爱其子，择师而教之；于其身也，则耻师焉，惑矣。彼童子之师，授之书而习其句读者，非吾所谓传其道解其惑者也。",
+                    "嗟乎！师道之不传也久矣！欲人之无惑也难矣！古之圣人，其出人也远矣，犹且从师而问焉；今之众人，其下圣人也亦远矣，而耻学于师。是故圣益圣，愚益愚。圣人之所以为圣，愚人之所以为愚，其皆出于此乎？爱其子，择师而教之；于其身也，则耻师焉，惑矣。彼童子之师，授之书而习其句读者，非吾所谓传其道解其惑者��。",
                     "句读之不知，惑之不解，或师焉，或不焉，小学而大遗，吾未见其明也。巫医乐师百工之人，不耻相师。士大夫之族，曰师曰弟子云者，则群聚而笑之。问之，则曰：彼与彼年相若也，道相似也。位卑则足羞，官盛则近谀。呜呼！师道之不复可知矣。巫医乐师百工之人，君子不齿，今其智乃反不能及，其可怪也欤！",
                     "圣人无常师。孔子师郯子、苌弘、师襄、老聃。郯子之徒，其贤不及孔子。孔子曰：三人行，则必有我师。是故弟子不必不如师，师不必贤于弟子，闻道有先后，术业有专攻，如是而已。李氏子蟠，年十七，好古文，六艺经传皆通习之，不拘于时，学于余。余嘉其能行古道，作师说以贻之。"
                 ]
@@ -768,6 +790,19 @@
                     "若夫霪雨霏霏，连月不开，阴风怒号，浊浪排空；日星隐曜，山岳潜形；商旅不行，樯倾楫摧；薄暮冥冥，虎啸猿啼。登斯楼也，则有去国怀乡，忧谗畏讥，满目萧然，感极而悲者矣。",
                     "至若春和景明，波澜不惊，上下天光，一碧万顷；沙鸥翔集，锦鳞游泳；岸芷汀兰，郁郁青青。而或长烟一空，皓月千里，浮光跃金，静影沉璧，渔歌互答，此乐何极！登斯楼也，则有心旷神怡，宠辱偕忘，把酒临风，其喜洋洋者矣。",
                     "嗟夫！予尝求古仁人之心，或异二者之为，何哉？不以物喜，不以己悲；居庙堂之高则忧其民；处江湖之远则忧其君。是进亦忧，退亦忧。然则何时而乐耶？其必曰：先天下之忧而忧，后天下之乐而乐乎。噫！微斯人，吾谁与归？"
+                ]
+            },
+            taohuayuan: {
+                title: "《桃花源记》 - 陶渊明",
+                content: [
+                    "晋太元中，武陵人捕鱼为业。缘溪行，忘路之远近。忽逢桃花林，夹岸数百步，中无杂树，芳草鲜美，落英缤纷。渔人甚异之，复前行，欲穷其林。",
+                    "林尽水源，便得一山，山有小口，仿佛若有光。便舍船，从口入。初极狭，才通人。复行数十步，豁然开朗。土地平旷，屋舍俨然，有良田美池桑竹之属。阡陌交通，鸡犬相闻。其中往来种作，男女衣着，悉如外人。黄发垂髫，并怡然自乐。"
+                ]
+            },
+            chibi: {
+                title: "《赤壁赋》 - 苏轼",
+                content: [
+                    "壬戌之秋，七月既望，苏子与客泛舟游于赤壁之下。清风徐来，水波不兴。举酒属客，诵明月之诗，歌窈窕之章。少焉，月出于东山之上，徘徊于斗牛之间。白露横江，水光接天。纵一苇之所如，凌万顷之茫然。浩浩乎如冯虚御风，而不知其所止；飘飘乎如遗世独立，羽化而登仙。"
                 ]
             }
         };
@@ -855,7 +890,7 @@
             hideAnswer();
         }
 
-        // 改进的分句函数
+        // 改进的分句函数 - 修复了单句处理问题
         function splitSentence(sentence) {
             // 使用正则表达式分割句子
             const regex = /([^，。！？；]+[，。！？；]?)/g;
@@ -868,7 +903,8 @@
                 }
             }
             
-            return matches;
+            // 如果没有匹配到任何分句，返回整个句子
+            return matches.length > 0 ? matches : [sentence];
         }
 
         // 辅助函数：检查分句是否以结束标点结尾
@@ -877,50 +913,100 @@
             return endingPunctuation.some(punc => part.endsWith(punc));
         }
 
-        // 生成问题
+        // 生成问题 - 修复了单句处理问题
         function generateQuestion() {
             if (!currentText) return;
             
-            // 随机选择题型 (0: 填写下句, 1: 填写上句)
-            const questionType = Math.random() < 0.6 ? 0 : 1;
+            let validQuestion = false;
+            let question = null;
+            let attempts = 0;
+            const maxAttempts = 10; // 防止无限循环
             
-            let sentenceIndex = Math.floor(Math.random() * currentText.content.length);
-            let sentence = currentText.content[sentenceIndex];
-            let parts = splitSentence(sentence);
-            
-            // 如果句子太短，尝试另一个句子
-            if (parts.length < 2) {
-                sentenceIndex = (sentenceIndex + 1) % currentText.content.length;
-                sentence = currentText.content[sentenceIndex];
-                parts = splitSentence(sentence);
+            while (!validQuestion && attempts < maxAttempts) {
+                attempts++;
+                
+                // 随机选择题型 (0: 填写下句, 1: 填写上句)
+                const questionType = Math.random() < 0.6 ? 0 : 1;
+                
+                let sentenceIndex = Math.floor(Math.random() * currentText.content.length);
+                let sentence = currentText.content[sentenceIndex];
+                let parts = splitSentence(sentence);
+                
+                // 如果句子太短（只有一个分句），��试另一个句子
+                if (parts.length < 2) {
+                    // 尝试下一个句子
+                    sentenceIndex = (sentenceIndex + 1) % currentText.content.length;
+                    sentence = currentText.content[sentenceIndex];
+                    parts = splitSentence(sentence);
+                    
+                    // 如果仍然只有一个分句，则跳过这个段落
+                    if (parts.length < 2) {
+                        continue;
+                    }
+                }
+                
+                let startIndex;
+                if (questionType === 0) { // 填写下句
+                    // 确保不是最后一个分句
+                    startIndex = Math.floor(Math.random() * Math.max(1, parts.length - 1));
+                    // 如果当前分句以结束标点结尾，则选择下一个
+                    if (hasEndingPunctuation(parts[startIndex]) && startIndex < parts.length - 1) {
+                        startIndex++;
+                    }
+                    
+                    // 确保有下一个分句
+                    if (startIndex >= parts.length - 1) {
+                        continue;
+                    }
+                } else { // 填写上句
+                    // 确保不是第一个分句且不是最后一个分句
+                    startIndex = Math.max(1, Math.min(parts.length - 1, 
+                                     Math.floor(Math.random() * parts.length)));
+                    // 如果当前分句以结束标点结尾，则选择前一个
+                    if (hasEndingPunctuation(parts[startIndex]) && startIndex > 0) {
+                        startIndex--;
+                    }
+                    
+                    // 确保有上一个分句
+                    if (startIndex < 1) {
+                        continue;
+                    }
+                }
+                
+                // 创建问题对象
+                question = {
+                    type: questionType,
+                    sentence: sentence,
+                    parts: parts,
+                    currentIndex: startIndex,
+                    answerIndex: questionType === 0 ? startIndex + 1 : startIndex - 1,
+                    answer: questionType === 0 ? parts[startIndex + 1] : parts[startIndex - 1]
+                };
+                
+                // 验证问题是否有效
+                if (question.answer && question.answer.trim() !== '') {
+                    validQuestion = true;
+                }
             }
             
-            let startIndex;
-            if (questionType === 0) { // 填写下句
-                // 确保不是最后一个分句
-                startIndex = Math.floor(Math.random() * Math.max(1, parts.length - 2));
-                // 如果当前分句以结束标点结尾，则选择下一个
-                if (hasEndingPunctuation(parts[startIndex])) {
-                    startIndex = (startIndex + 1) % parts.length;
-                }
-            } else { // 填写上句
-                // 确保不是第一个分句
-                startIndex = Math.max(1, Math.floor(Math.random() * parts.length));
-                // 如果当前分句以结束标点结尾，则选择前一个
-                if (hasEndingPunctuation(parts[startIndex])) {
-                    startIndex = (startIndex - 1 + parts.length) % parts.length;
-                }
+            if (!validQuestion || !question) {
+                // 无法生成有效题目
+                resultElement.className = 'result info';
+                resultElement.textContent = '无法为此文章生成题目，请尝试其他文章';
+                resultElement.classList.add('active');
+                
+                // 禁用导航按钮
+                prevBtn.classList.add('btn-disabled');
+                nextBtn.classList.add('btn-disabled');
+                
+                // 清空问题显示
+                questionElement.innerHTML = '<div class="question-part"><span>文章内容不足或格式问题</span></div>';
+                return;
             }
             
-            // 创建问题对象
-            const question = {
-                type: questionType,
-                sentence: sentence,
-                parts: parts,
-                currentIndex: startIndex,
-                answerIndex: questionType === 0 ? startIndex + 1 : startIndex - 1,
-                answer: questionType === 0 ? parts[startIndex + 1] : parts[startIndex - 1]
-            };
+            // 启用导航按钮
+            prevBtn.classList.remove('btn-disabled');
+            nextBtn.classList.remove('btn-disabled');
             
             // 保存问题到历史
             questionHistory.push(question);
@@ -1003,7 +1089,7 @@
                     // 设置下划线宽度（至少为100px）
                     blankLine.style.width = `${Math.max(answerWidth + 10, 100)}px`;
                 }
-            }, 50);
+            }, 100);
             
             // 根据答案显示状态更新
             if (answerVisible) {
