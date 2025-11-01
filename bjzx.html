@@ -3,26 +3,45 @@
 <head> 
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
 <script type="text/javascript">
-/*鼠标点击出现文字*/
-$(document).ready(function(){
+/*鼠标点击出现文字 - 修复版*/
+document.addEventListener('DOMContentLoaded', function() {
     var a_index = 0;
-    $("body").click(function(e){
-        var a = new Array("努力拼搏" ,"^_^",  "青春旋律", "梦想启航", "知识海洋", "团结友爱", "内卷", "成长之路", "yyds", "奋斗不止", "荣耀北中");
-        var $i = $("<span/>").text(a[a_index]);
+    var a = new Array("努力拼搏" ,"^_^",  "青春旋律", "梦想启航", "知识海洋", "团结友爱", "内卷", "成长之路", "yyds", "奋斗不止", "荣耀北中");
+    
+    document.body.addEventListener('click', function(e) {
+        var span = document.createElement('span');
+        span.textContent = a[a_index];
         a_index = (a_index + 1) % a.length;
-        var x = e.pageX,y = e.pageY;
-        $i.css({
-            "z-index": 99999,
-            "top": y - 20,
-            "left": x,
-            "position": "absolute",
-            "font-weight": "bold",
-            "color": "#D3D3D3"
+        
+        var x = e.pageX;
+        var y = e.pageY;
+        
+        span.style.cssText = `
+            z-index: 99999;
+            top: ${y - 20}px;
+            left: ${x}px;
+            position: absolute;
+            font-weight: bold;
+            color: #D3D3D3;
+            font-size: 16px;
+            pointer-events: none;
+        `;
+        
+        document.body.appendChild(span);
+        
+        // 使用requestAnimationFrame确保动画开始前元素已渲染
+        requestAnimationFrame(function() {
+            span.style.transition = 'all 1.5s ease-out';
+            span.style.top = (y - 180) + 'px';
+            span.style.opacity = '0';
         });
-        $("body").append($i);
-        $i.animate({"top": y-180,"opacity": 0},1500,function() {
-            $i.remove();
-        });
+        
+        // 动画结束后移除元素
+        setTimeout(function() {
+            if (span.parentNode) {
+                span.parentNode.removeChild(span);
+            }
+        }, 1500);
     });
 });
 </script> 
